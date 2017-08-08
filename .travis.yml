@@ -76,7 +76,7 @@ before_install:
 script:
 
 - ./gradlew test
-- ./gradlew clean build
+#- ./gradlew clean build
 
 #before_deploy:
 
