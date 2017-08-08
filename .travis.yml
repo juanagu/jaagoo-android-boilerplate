@@ -17,4 +17,4 @@ licenses:
 - 'google-gdk-license-.+'
 
 script:
-./gradlew test
+App/./gradlew test
