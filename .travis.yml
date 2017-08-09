@@ -73,29 +73,16 @@ before_install:
 - chmod +x gradlew
 - ./gradlew dependencies || true
 
-stages:
-  - build
-  - guidelines
-  - test
-
-build:
-  stage: build
-  script:
-    - ./gradlew assembleDebug --stacktrace
-
-guidelines:
-  stage: guidelines
-  script:
-  	- ./gradlew checkstyle
-    - ./gradlew pmd
-    - ./findbugs
-
-unitTest:
-  stage: test
-  script:
-    - ./gradlew test
-
-
+jobs:
+  include:
+    -stage: build
+    script: -./gradlew assembleDebug --stacktrace 
+    -stage: guidelines 
+    script: -./gradlew checkstyle
+    script: -./gradlew pmd
+    script: -./findbugs 
+    -stage: test
+    script: -./gradlew test
 
 #before_deploy:
 
