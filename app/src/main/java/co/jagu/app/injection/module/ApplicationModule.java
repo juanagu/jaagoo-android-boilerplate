@@ -8,9 +8,6 @@ import co.jagu.app.injection.ApplicationContext;
 import dagger.Module;
 import dagger.Provides;
 
-/**
- * Created by juanagu on 7/8/17.
- */
 @Module
 public class ApplicationModule {
 

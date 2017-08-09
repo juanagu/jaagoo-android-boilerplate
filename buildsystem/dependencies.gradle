@@ -29,6 +29,7 @@ ext {
     retrofitVersion = '2.3.0'
     androidAnnotationsVersion = '25.4.0'
     arrowVersion = '1.0.0'
+    fragmentargsVersion = '3.0.2'
 
     robolectricVersion = '3.1.1'
     jUnitVersion = '4.12'
@@ -52,6 +53,9 @@ ext {
             rxJava         : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
             rxAndroid      : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
             javaxAnnotation: "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            fragmentargs: "com.hannesdorfmann.fragmentargs:annotation:${fragmentargsVersion}",
+            fragmentargsProcessor: "com.hannesdorfmann" +
+                    ".fragmentargs:processor:${fragmentargsVersion}"
     ]
 
     appTestDependencies = [

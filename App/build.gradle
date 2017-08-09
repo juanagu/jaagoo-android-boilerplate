@@ -75,6 +75,9 @@ dependencies {
     compile appDependencies.rxAndroid
     provided appDependencies.javaxAnnotation
 
+    compile appDependencies.fragmentargs
+    annotationProcessor appDependencies.fragmentargsProcessor
+
     androidTestCompile appTestDependencies.mockito
     androidTestCompile appTestDependencies.dexmaker
     androidTestCompile appTestDependencies.dexmakerMockito
