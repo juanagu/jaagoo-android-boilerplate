@@ -76,13 +76,13 @@ before_install:
 jobs:
   include:
     -stage: build
-    script: -./gradlew assembleDebug --stacktrace 
+    script: ./gradlew assembleDebug 
     -stage: guidelines 
-    script: -./gradlew checkstyle
-    script: -./gradlew pmd
-    script: -./findbugs 
+    script: ./gradlew checkstyle
+    script: ./gradlew pmd
+    script: ./findbugs 
     -stage: test
-    script: -./gradlew test
+    script: ./gradlew test
 
 #before_deploy:
 
