@@ -73,10 +73,16 @@ before_install:
 - chmod +x gradlew
 - ./gradlew dependencies || true
 
-script:
-
-- ./gradlew test
-#- ./gradlew clean build
+jobs:
+  include:
+    -stage: build
+    script: ./gradlew assembleDebug 
+    -stage: guidelines 
+    script: ./gradlew checkstyle
+    script: ./gradlew pmd
+    script: ./findbugs 
+    -stage: test
+    script: ./gradlew test
 
 #before_deploy:
 
