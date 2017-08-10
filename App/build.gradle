@@ -63,21 +63,33 @@ dependencies {
     compile project(':domain')
     compile project(':data')
 
+    //google
     compile appDependencies.appCompat
     compile appDependencies.constraint
     compile appDependencies.design
+    compile appDependencies.recyclerView
 
+    //dagger
     apt appDependencies.daggerCompiler
     compile appDependencies.dagger
+    //butter knife
     compile appDependencies.butterKnife
-    compile appDependencies.recyclerView
+    //fx
     compile appDependencies.rxJava
     compile appDependencies.rxAndroid
     provided appDependencies.javaxAnnotation
 
+    //fragment args
     compile appDependencies.fragmentargs
     annotationProcessor appDependencies.fragmentargsProcessor
 
+    //auto value
+    provided appDependencies.autoValue
+    apt appDependencies.autoValue
+    annotationProcessor appDependencies.autoValueParcel
+    compile appDependencies.autoValueParcel
+
+    //android test instrumentation
     androidTestCompile appTestDependencies.mockito
     androidTestCompile appTestDependencies.dexmaker
     androidTestCompile appTestDependencies.dexmakerMockito
@@ -86,4 +98,6 @@ dependencies {
 
     //Development
     compile developmentDependencies.leakCanary
+    compile 'com.android.support:support-v4:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }

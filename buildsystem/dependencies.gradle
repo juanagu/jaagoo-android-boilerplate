@@ -30,6 +30,9 @@ ext {
     androidAnnotationsVersion = '25.4.0'
     arrowVersion = '1.0.0'
     fragmentargsVersion = '3.0.2'
+    autoValueVersion = '1.2'
+    autoValueParcelVersion = '0.2.5'
+    autoValueGsonVersion = '0.5.0'
 
     robolectricVersion = '3.1.1'
     jUnitVersion = '4.12'
@@ -43,19 +46,25 @@ ext {
     leakCanaryVersion = '1.5.1'
 
     appDependencies = [
-            appCompat      : "com.android.support:appcompat-v7:${appCompatVersion}",
-            constraint     : "com.android.support.constraint:constraint-layout:${constraintVersion}",
-            design         : "com.android.support:design:${designVersion}",
-            daggerCompiler : "com.google.dagger:dagger-compiler:${daggerVersion}",
-            dagger         : "com.google.dagger:dagger:${daggerVersion}",
-            butterKnife    : "com.jakewharton:butterknife:${butterKnifeVersion}",
-            recyclerView   : "com.android.support:recyclerview-v7:${recyclerViewVersion}",
-            rxJava         : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
-            rxAndroid      : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
-            javaxAnnotation: "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
-            fragmentargs: "com.hannesdorfmann.fragmentargs:annotation:${fragmentargsVersion}",
+            appCompat            : "com.android.support:appcompat-v7:${appCompatVersion}",
+            constraint           : "com.android.support.constraint:constraint-layout:${constraintVersion}",
+            design               : "com.android.support:design:${designVersion}",
+            daggerCompiler       : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            dagger               : "com.google.dagger:dagger:${daggerVersion}",
+            butterKnife          : "com.jakewharton:butterknife:${butterKnifeVersion}",
+            recyclerView         : "com.android.support:recyclerview-v7:${recyclerViewVersion}",
+            rxJava               : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxAndroid            : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            javaxAnnotation      : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            fragmentargs         : "com.hannesdorfmann.fragmentargs:annotation:${fragmentargsVersion}",
             fragmentargsProcessor: "com.hannesdorfmann" +
-                    ".fragmentargs:processor:${fragmentargsVersion}"
+                    ".fragmentargs:processor:${fragmentargsVersion}",
+            autoValue            : "com.google.auto.value:auto-value:${autoValueVersion}",
+            autoValueParcel      : "com.ryanharter.auto" +
+                    ".value:auto-value-parcel:${autoValueParcelVersion}",
+            autoValueGson        : "com.ryanharter.auto.value:auto-value-gson:${autoValueGsonVersion}"
+
+
     ]
 
     appTestDependencies = [

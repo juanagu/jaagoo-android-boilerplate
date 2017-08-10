@@ -1,9 +1,9 @@
 package co.jagu.app.ui.base;
 
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 
 import com.hannesdorfmann.fragmentargs.FragmentArgs;
 
@@ -11,7 +11,7 @@ import com.hannesdorfmann.fragmentargs.FragmentArgs;
  * Created by juanagu on 9/8/17.
  */
 
-public abstract class BaseFragment<Params> extends Fragment {
+public abstract class BaseFragment extends Fragment {
 
     /*--
     Lifecycle
@@ -28,13 +28,5 @@ public abstract class BaseFragment<Params> extends Fragment {
         //read args fields
         FragmentArgs.inject(this);
     }
-
-    /**
-     * create a new instance of the fragment
-     *
-     * @param params
-     * @return
-     */
-    abstract Fragment newInstance(Params params);
 
 }
