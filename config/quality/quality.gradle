@@ -35,19 +35,21 @@ task checkstyle(type: Checkstyle, group: 'Verification', description: 'Runs code
         }
     }
 
-    classpath = files( )
+    classpath = files()
 }
 
 task findbugs(type: FindBugs,
         group: 'Verification',
         description: 'Inspect java bytecode for bugs',
-        dependsOn: ['compileDebugSources','compileReleaseSources']) {
+        dependsOn: ['compileDebugSources', 'compileReleaseSources']) {
 
     ignoreFailures = false
     effort = "max"
     reportLevel = "high"
     excludeFilter = new File("$qualityConfigDir/findbugs/android-exclude-filter.xml")
-    classes = files("$project.rootDir/app/build/intermediates/classes")
+    classes = files("$project.rootDir/presentation/build/intermediates/classes",
+            "$project.rootDir/domain/build/intermediates/classes",
+            "$project.rootDir/data/build/intermediates/classes")
 
     source 'src'
     include '**/*.java'

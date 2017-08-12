@@ -48,7 +48,8 @@ public abstract class BaseActivity extends LifecycleActivity {
         } else {
             configPersistentComponent = sComponentsMap.get(mActivityId);
         }
-        mActivityComponent = configPersistentComponent.activityComponent(new BaseActivityModule(this));
+        mActivityComponent = configPersistentComponent
+                .activityComponent(new BaseActivityModule(this));
     }
 
     @Override
