@@ -6,7 +6,7 @@ import com.squareup.leakcanary.LeakCanary;
 
 import co.jagu.app.BuildConfig;
 import co.jagu.presentation.injection.component.ApplicationComponent;
-import co.jagu.app.injection.component.DaggerApplicationComponent;
+import co.jagu.presentation.injection.component.DaggerApplicationComponent;
 import co.jagu.presentation.injection.module.ApplicationModule;
 
 /**

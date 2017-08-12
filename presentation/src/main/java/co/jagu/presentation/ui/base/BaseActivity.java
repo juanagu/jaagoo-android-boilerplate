@@ -11,7 +11,7 @@ import co.jagu.presentation.AndroidApplication;
 import co.jagu.presentation.injection.component.ApplicationComponent;
 import co.jagu.presentation.injection.component.BaseActivityComponent;
 import co.jagu.presentation.injection.component.ConfigPersistentComponent;
-import co.jagu.app.injection.component.DaggerConfigPersistentComponent;
+import co.jagu.presentation.injection.component.DaggerConfigPersistentComponent;
 import co.jagu.presentation.injection.module.BaseActivityModule;
 import io.reactivex.disposables.CompositeDisposable;
 

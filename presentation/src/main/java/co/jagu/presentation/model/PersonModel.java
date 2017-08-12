@@ -5,8 +5,6 @@ import android.support.annotation.Nullable;
 
 import com.google.auto.value.AutoValue;
 
-import co.jagu.app.model.$AutoValue_PersonModel;
-
 /**
  * Class that represent a person in the app layer
  */
