@@ -17,6 +17,8 @@ ext {
     appCompatVersion = '25.3.1'
     constraintVersion = '1.0.2'
     designVersion = '25.3.1'
+    supportVersion = '25.3.1'
+    multidexVersion = '1.0.0'
 
     androidArchVersion = '1.0.0-alpha5'
 
@@ -47,10 +49,13 @@ ext {
     //Development
     leakCanaryVersion = '1.5.1'
 
-    appDependencies = [
+
+    presentationDependencies = [
+            multidex             : "com.android.support:multidex:${multidexVersion}",
             appCompat            : "com.android.support:appcompat-v7:${appCompatVersion}",
             constraint           : "com.android.support.constraint:constraint-layout:" +
                     "${constraintVersion}",
+            support              : "com.android.support:support-v4:${supportVersion}",
             design               : "com.android.support:design:${designVersion}",
             daggerCompiler       : "com.google.dagger:dagger-compiler:${daggerVersion}",
             dagger               : "com.google.dagger:dagger:${daggerVersion}",
@@ -75,7 +80,7 @@ ext {
 
     ]
 
-    appTestDependencies = [
+    presentationTestDependencies = [
             mockito          : "org.mockito:mockito-core:${mockitoVersion}",
             dexmaker         : "com.google.dexmaker:dexmaker:${dexmakerVersion}",
             dexmakerMockito  : "com.google.dexmaker:dexmaker-mockito:${dexmakerVersion}",

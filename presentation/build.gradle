@@ -17,6 +17,9 @@ android {
         versionName globalConfiguration.getAt("androidVersionName")
         testInstrumentationRunner globalConfiguration.getAt("testInstrumentationRunner")
         testApplicationId globalConfiguration.getAt("testApplicationId")
+
+        // Enabling multidex support.
+        multiDexEnabled true
     }
 
     compileOptions {
@@ -56,53 +59,51 @@ android {
 }
 
 dependencies {
-    def appDependencies = rootProject.ext.appDependencies
-    def appTestDependencies = rootProject.ext.appTestDependencies
+    def presentationDependencies = rootProject.ext.presentationDependencies
+    def presentationTestDependencies = rootProject.ext.presentationTestDependencies
     def developmentDependencies = rootProject.ext.developmentDependencies
 
     compile project(':domain')
     compile project(':data')
 
     //google
-    compile appDependencies.appCompat
-    compile appDependencies.constraint
-    compile appDependencies.design
-    compile appDependencies.recyclerView
-
+    compile presentationDependencies.appCompat
+    compile presentationDependencies.constraint
+    compile presentationDependencies.design
+    compile presentationDependencies.recyclerView
+    compile presentationDependencies.support
     //android architecture components
-    compile appDependencies.lifecycle
-    compile appDependencies.lifecycleExt
-    annotationProcessor appDependencies.lifecycleCompiler
+    compile presentationDependencies.lifecycle
+    compile presentationDependencies.lifecycleExt
+    annotationProcessor presentationDependencies.lifecycleCompiler
 
     //dagger
-    apt appDependencies.daggerCompiler
-    compile appDependencies.dagger
+    apt presentationDependencies.daggerCompiler
+    compile presentationDependencies.dagger
     //butter knife
-    compile appDependencies.butterKnife
+    compile presentationDependencies.butterKnife
     //fx
-    compile appDependencies.rxJava
-    compile appDependencies.rxAndroid
-    provided appDependencies.javaxAnnotation
+    compile presentationDependencies.rxJava
+    compile presentationDependencies.rxAndroid
+    provided presentationDependencies.javaxAnnotation
 
     //fragment args
-    compile appDependencies.fragmentargs
-    annotationProcessor appDependencies.fragmentargsProcessor
+    compile presentationDependencies.fragmentargs
+    annotationProcessor presentationDependencies.fragmentargsProcessor
 
     //auto value
-    provided appDependencies.autoValue
-    apt appDependencies.autoValue
-    annotationProcessor appDependencies.autoValueParcel
-    compile appDependencies.autoValueParcel
+    provided presentationDependencies.autoValue
+    apt presentationDependencies.autoValue
+    annotationProcessor presentationDependencies.autoValueParcel
+    compile presentationDependencies.autoValueParcel
 
     //android test instrumentation
-    androidTestCompile appTestDependencies.mockito
-    androidTestCompile appTestDependencies.dexmaker
-    androidTestCompile appTestDependencies.dexmakerMockito
-    androidTestCompile appTestDependencies.espresso
-    androidTestCompile appTestDependencies.testingSupportLib
+    androidTestCompile presentationTestDependencies.mockito
+    androidTestCompile presentationTestDependencies.dexmaker
+    androidTestCompile presentationTestDependencies.dexmakerMockito
+    androidTestCompile presentationTestDependencies.espresso
+    androidTestCompile presentationTestDependencies.testingSupportLib
 
     //Development
     compile developmentDependencies.leakCanary
-    compile 'com.android.support:support-v4:25.3.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }
