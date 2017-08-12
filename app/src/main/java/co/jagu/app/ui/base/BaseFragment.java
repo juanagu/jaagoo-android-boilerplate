@@ -1,17 +1,23 @@
 package co.jagu.app.ui.base;
 
 
+import android.arch.lifecycle.LifecycleFragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 
 import com.hannesdorfmann.fragmentargs.FragmentArgs;
+
+import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * Created by juanagu on 9/8/17.
  */
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends LifecycleFragment {
+    /*--
+    Fields
+     --*/
+    protected final CompositeDisposable mDisposable = new CompositeDisposable();
 
     /*--
     Lifecycle
@@ -29,4 +35,10 @@ public abstract class BaseFragment extends Fragment {
         FragmentArgs.inject(this);
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        // clear all the subscriptions
+        mDisposable.clear();
+    }
 }

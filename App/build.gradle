@@ -69,6 +69,11 @@ dependencies {
     compile appDependencies.design
     compile appDependencies.recyclerView
 
+    //android architecture components
+    compile appDependencies.lifecycle
+    compile appDependencies.lifecycleExt
+    annotationProcessor appDependencies.lifecycleCompiler
+
     //dagger
     apt appDependencies.daggerCompiler
     compile appDependencies.dagger

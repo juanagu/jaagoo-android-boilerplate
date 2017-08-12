@@ -1,7 +1,7 @@
 package co.jagu.app.ui.base;
 
+import android.arch.lifecycle.LifecycleActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,13 +13,14 @@ import co.jagu.app.injection.component.BaseActivityComponent;
 import co.jagu.app.injection.component.ConfigPersistentComponent;
 import co.jagu.app.injection.component.DaggerConfigPersistentComponent;
 import co.jagu.app.injection.module.BaseActivityModule;
+import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * Abstract activity that every other Activity in this application must implement. It handles
  * creation of Dagger components and makes sure that instances of ConfigPersistentComponent survive
  * across configuration changes.
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends LifecycleActivity {
 
     private static final String KEY_ACTIVITY_ID = "KEY_ACTIVITY_ID";
     private static final AtomicLong NEXT_ID = new AtomicLong(0);
@@ -27,6 +28,8 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private BaseActivityComponent mActivityComponent;
     private long mActivityId;
+
+    protected final CompositeDisposable mDisposable = new CompositeDisposable();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putLong(KEY_ACTIVITY_ID, mActivityId);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        // clear all the subscriptions
+        mDisposable.clear();
     }
 
     @Override
