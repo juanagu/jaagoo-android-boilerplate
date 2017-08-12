@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import com.hannesdorfmann.fragmentargs.annotation.Arg;
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
 
-import co.jagu.app.R;
+import co.jagu.presentation.R;
 import co.jagu.presentation.model.PersonModel;
 import co.jagu.presentation.ui.base.BaseFragment;
 

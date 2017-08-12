@@ -1,4 +1,4 @@
-package co.jagu.app;
+package co.jagu.presentation;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
