@@ -2,6 +2,7 @@ package co.jagu.presentation.ui.person.detail;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,9 @@ import android.view.ViewGroup;
 import com.hannesdorfmann.fragmentargs.annotation.Arg;
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
 
+import javax.inject.Inject;
+
+import butterknife.ButterKnife;
 import co.jagu.presentation.R;
 import co.jagu.presentation.model.PersonModel;
 import co.jagu.presentation.ui.base.BaseFragment;
@@ -27,19 +31,43 @@ public class PersonDetailFragment extends BaseFragment {
     @Arg
     PersonModel mPersonModel;
 
+    @Inject
+    PersonDetailViewModel mPersonDetailViewModel;
     /*--
     Constructor
-     */
+    --*/
 
     public PersonDetailFragment() {
         // Required empty public constructor
     }
 
+    /*--
+    Lifecycle
+    --*/
 
+    /**
+     * @param savedInstanceState
+     */
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        mPersonDetailViewModel.setPerson(mPersonModel);
+    }
+
+    /**
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_person_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_person_detail, container, false);
+        //inject view components
+        ButterKnife.bind(view);
+        return view;
     }
 
 

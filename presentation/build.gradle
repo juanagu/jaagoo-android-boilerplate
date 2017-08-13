@@ -72,6 +72,7 @@ android {
 dependencies {
     def presentationDependencies = rootProject.ext.presentationDependencies
     def presentationTestDependencies = rootProject.ext.presentationTestDependencies
+    def testDependencies = rootProject.ext.dataTestDependencies
     def developmentDependencies = rootProject.ext.developmentDependencies
 
     compile project(':domain')
@@ -107,6 +108,11 @@ dependencies {
     apt presentationDependencies.autoValue
     annotationProcessor presentationDependencies.autoValueParcel
     compile presentationDependencies.autoValueParcel
+
+    //unit test
+    testCompile testDependencies.junit
+    testCompile testDependencies.assertj
+    testCompile testDependencies.mockito
 
     //android test instrumentation
     androidTestCompile presentationTestDependencies.mockito

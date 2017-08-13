@@ -55,6 +55,7 @@ dependencies {
     def testDependencies = rootProject.ext.dataTestDependencies
 
     compile project(':domain')
+
     provided dataDependencies.javaxAnnotation
     compile dataDependencies.javaxInject
     compile dataDependencies.retrofit
