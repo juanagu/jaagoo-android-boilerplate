@@ -3,12 +3,10 @@ package co.jagu.presentation.ui.person.detail;
 import javax.inject.Inject;
 
 import co.jagu.domain.interactor.person.GetPersonDetail;
-import co.jagu.presentation.model.PersonModel;
-import co.jagu.presentation.ui.base.BaseView;
 import co.jagu.presentation.ui.base.BaseViewModel;
 
 
-public class PersonDetailViewModel extends BaseViewModel<PersonDetailView>{
+public class PersonDetailViewModel extends BaseViewModel<PersonDetailView> {
 
     /*--
     Dependency
