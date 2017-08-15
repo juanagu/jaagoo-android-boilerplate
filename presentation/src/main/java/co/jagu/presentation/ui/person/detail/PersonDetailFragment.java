@@ -23,13 +23,13 @@ import co.jagu.presentation.ui.base.BaseFragment;
  * create an instance of this fragment.
  */
 @FragmentWithArgs
-public class PersonDetailFragment extends BaseFragment {
+public class PersonDetailFragment extends BaseFragment implements PersonDetailView {
 
     /*--
     Fields
     --*/
     @Arg
-    PersonModel mPersonModel;
+    long mPersonId;
 
     @Inject
     PersonDetailViewModel mPersonDetailViewModel;
@@ -51,8 +51,7 @@ public class PersonDetailFragment extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mPersonDetailViewModel.setPerson(mPersonModel);
+        mPersonDetailViewModel.setPersonId(mPersonId);
     }
 
     /**
@@ -71,4 +70,17 @@ public class PersonDetailFragment extends BaseFragment {
     }
 
 
+    /*--
+    Implementation of {@link PersonDetailView}
+    --*/
+
+    /**
+     * Render a person in the UI
+     *
+     * @param personModel
+     */
+    @Override
+    public void renderPerson(PersonModel personModel) {
+
+    }
 }

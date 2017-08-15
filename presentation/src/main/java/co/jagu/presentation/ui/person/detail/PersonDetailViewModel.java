@@ -12,7 +12,6 @@ public class PersonDetailViewModel extends BaseViewModel {
     /*--
     Dependency
     --*/
-    @Inject
     private GetPersonDetail mGetPersonDetail;
     /*--
     Fields
@@ -20,10 +19,11 @@ public class PersonDetailViewModel extends BaseViewModel {
 
 
     /*--
-    Methods
+    Constructor
     --*/
-    public PersonDetailViewModel() {
-
+    @Inject
+    public PersonDetailViewModel(GetPersonDetail getPersonDetail) {
+        this.mGetPersonDetail = getPersonDetail;
     }
 
     /*--

@@ -10,6 +10,9 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity(tableName = "persons")
 public class PersonEntity {
 
+    /*--
+    Fields
+    --*/
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     private long mId;
@@ -23,6 +26,9 @@ public class PersonEntity {
     @ColumnInfo(name = "avatar")
     private String mAvatar;
 
+    /*--
+    Getters and setters
+    --*/
 
     public long getId() {
         return mId;
