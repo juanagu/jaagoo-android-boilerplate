@@ -55,6 +55,7 @@ dependencies {
     def testDependencies = rootProject.ext.dataTestDependencies
 
     compile project(':domain')
+
     provided dataDependencies.javaxAnnotation
     compile dataDependencies.javaxInject
     compile dataDependencies.retrofit
@@ -62,9 +63,15 @@ dependencies {
     compile dataDependencies.rxJava
     compile dataDependencies.rxAndroid
     compile dataDependencies.androidAnnotations
+    //android architecture components
+    compile dataDependencies.room
+    annotationProcessor dataDependencies.roomCompiler
+    compile dataDependencies.roomRx
+
 
     testCompile testDependencies.junit
     testCompile testDependencies.assertj
     testCompile testDependencies.mockito
     testCompile testDependencies.robolectric
+    testCompile testDependencies.room
 }
