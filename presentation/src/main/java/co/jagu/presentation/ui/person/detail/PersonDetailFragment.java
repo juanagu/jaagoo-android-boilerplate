@@ -50,7 +50,10 @@ public class PersonDetailFragment extends BaseFragment implements PersonDetailVi
      */
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
+        mPersonDetailViewModel.attachView(this);
         mPersonDetailViewModel.setPersonId(mPersonId);
     }
 

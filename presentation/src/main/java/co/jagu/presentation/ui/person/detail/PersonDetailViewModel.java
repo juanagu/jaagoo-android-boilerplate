@@ -4,19 +4,16 @@ import javax.inject.Inject;
 
 import co.jagu.domain.interactor.person.GetPersonDetail;
 import co.jagu.presentation.model.PersonModel;
+import co.jagu.presentation.ui.base.BaseView;
 import co.jagu.presentation.ui.base.BaseViewModel;
 
 
-public class PersonDetailViewModel extends BaseViewModel {
+public class PersonDetailViewModel extends BaseViewModel<PersonDetailView>{
 
     /*--
     Dependency
     --*/
     private GetPersonDetail mGetPersonDetail;
-    /*--
-    Fields
-    --*/
-
 
     /*--
     Constructor
@@ -31,5 +28,10 @@ public class PersonDetailViewModel extends BaseViewModel {
     -- */
     public void setPersonId(long personId) {
         mGetPersonDetail.buildUseCaseObservable(GetPersonDetail.Params.forPerson(personId));
+    }
+
+    @Override
+    public void attachView(PersonDetailView view) {
+        super.attachView(view);
     }
 }
