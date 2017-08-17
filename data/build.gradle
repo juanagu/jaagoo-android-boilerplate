@@ -24,6 +24,7 @@ android {
         minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
         targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
         versionCode globalConfiguration.getAt("androidVersionCode")
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     compileOptions {
@@ -47,6 +48,7 @@ android {
         disable 'OldTargetApi'
         // Due to Robolectric that modifies the manifest when running tests
     }
+
     buildToolsVersion '26.0.0'
 }
 
@@ -74,4 +76,15 @@ dependencies {
     testCompile testDependencies.mockito
     testCompile testDependencies.robolectric
     testCompile testDependencies.room
+
+    //android test instrumentation
+    androidTestCompile testDependencies.junit
+    androidTestCompile testDependencies.mockito
+    androidTestCompile testDependencies.dexmaker
+    androidTestCompile testDependencies.dexmakerMockito
+    //androidTestCompile testDependencies.testingSupportLib
+    androidTestCompile testDependencies.testRunner
+    androidTestCompile testDependencies.testRules
+    androidTestCompile testDependencies.room
+    androidTestCompile testDependencies.coreTesting
 }

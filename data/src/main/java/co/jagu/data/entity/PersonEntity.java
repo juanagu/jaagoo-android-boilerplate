@@ -27,6 +27,18 @@ public class PersonEntity {
     private String mAvatar;
 
     /*--
+    Constructors
+    -- */
+    public PersonEntity() {
+
+    }
+    
+    public PersonEntity(String firstName, String lastName) {
+        super();
+        this.mFirstName = firstName;
+        this.mLastName = lastName;
+    }
+    /*--
     Getters and setters
     --*/
 
