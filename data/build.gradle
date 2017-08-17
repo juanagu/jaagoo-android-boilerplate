@@ -24,7 +24,7 @@ android {
         minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
         targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
         versionCode globalConfiguration.getAt("androidVersionCode")
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner globalConfiguration.getAt("testInstrumentationRunner")
     }
 
     compileOptions {
@@ -67,7 +67,7 @@ dependencies {
     compile dataDependencies.androidAnnotations
     //android architecture components
     compile dataDependencies.room
-    annotationProcessor dataDependencies.roomCompiler
+    apt dataDependencies.roomCompiler
     compile dataDependencies.roomRx
 
 
@@ -87,4 +87,5 @@ dependencies {
     androidTestCompile testDependencies.testRules
     androidTestCompile testDependencies.room
     androidTestCompile testDependencies.coreTesting
+
 }

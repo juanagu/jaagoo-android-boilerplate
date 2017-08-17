@@ -6,18 +6,27 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import co.jagu.data.entity.PersonEntity;
+import co.jagu.data.source.local.dao.factory.PersonFakeFactory;
 
 @RunWith(AndroidJUnit4.class)
 public class PersonDaoTest extends BaseDaoTest {
-
-    private final static PersonEntity PERSON = new PersonEntity("Juan", "Agú");
-
     /*--
     Test
     -- */
     @Test
     public void insertAndGetPersonById() {
-        mDatabase.personDao().insert(PERSON);
-        mDatabase.personDao().getPersonById(PERSON.getId()).test().assertValue(PERSON);
+
+        PersonEntity person = PersonFakeFactory.createPerson();
+        PersonEntity person1 = PersonFakeFactory.createPerson();
+
+        mDatabase.personDao().insert(person1);
+        final long PERSON_ID = mDatabase.personDao().insert(person);
+
+
+        mDatabase.personDao().getPersonById(PERSON_ID)
+                .test()
+                .assertValue(personEntity -> personEntity != null
+                        && personEntity.getFirstName().equals(person.getFirstName())
+                        && personEntity.getLastName().equals(person.getLastName()));
     }
 }

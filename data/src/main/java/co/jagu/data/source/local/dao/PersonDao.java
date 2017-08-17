@@ -1,6 +1,9 @@
 package co.jagu.data.source.local.dao;
 
 import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.OnConflictStrategy;
+import android.arch.persistence.room.Query;
 
 import co.jagu.data.entity.PersonEntity;
 import io.reactivex.Flowable;
@@ -8,7 +11,9 @@ import io.reactivex.Flowable;
 @Dao
 public interface PersonDao {
 
-    void insert(PersonEntity person);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    long insert(PersonEntity person);
 
+    @Query("SELECT * FROM persons where id = :id")
     Flowable<PersonEntity> getPersonById(long id);
 }
