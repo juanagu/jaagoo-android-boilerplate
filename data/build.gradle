@@ -76,16 +76,8 @@ dependencies {
     testCompile testDependencies.mockito
     testCompile testDependencies.robolectric
     testCompile testDependencies.room
-
-    //android test instrumentation
-    androidTestCompile testDependencies.junit
-    androidTestCompile testDependencies.mockito
-    androidTestCompile testDependencies.dexmaker
-    androidTestCompile testDependencies.dexmakerMockito
-    //androidTestCompile testDependencies.testingSupportLib
-    androidTestCompile testDependencies.testRunner
-    androidTestCompile testDependencies.testRules
-    androidTestCompile testDependencies.room
-    androidTestCompile testDependencies.coreTesting
+    testCompile testDependencies.testRunner
+    testCompile testDependencies.testRules
+    testCompile testDependencies.coreTesting
 
 }

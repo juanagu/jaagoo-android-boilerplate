@@ -1,14 +1,13 @@
 package co.jagu.data.source.local.dao;
 
-import android.support.test.runner.AndroidJUnit4;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
 
 import co.jagu.data.entity.PersonEntity;
 import co.jagu.data.source.local.dao.factory.PersonFakeFactory;
 
-@RunWith(AndroidJUnit4.class)
+@RunWith(RobolectricTestRunner.class)
 public class PersonDaoTest extends BaseDaoTest {
     /*--
     Test
@@ -19,9 +18,8 @@ public class PersonDaoTest extends BaseDaoTest {
         PersonEntity person = PersonFakeFactory.createPerson();
         PersonEntity person1 = PersonFakeFactory.createPerson();
 
-        mDatabase.personDao().insert(person1);
-        final long PERSON_ID = mDatabase.personDao().insert(person);
-
+        mDatabase.personDao().insertOrUpdate(person1);
+        final long PERSON_ID = mDatabase.personDao().insertOrUpdate(person);
 
         mDatabase.personDao().getPersonById(PERSON_ID)
                 .test()

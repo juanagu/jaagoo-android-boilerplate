@@ -7,6 +7,9 @@ import android.support.test.InstrumentationRegistry;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
+import org.robolectric.RuntimeEnvironment;
+
+import co.jagu.data.ApplicationTestCase;
 
 /**
  * class base for test dao with room
@@ -24,7 +27,7 @@ public abstract class BaseDaoTest {
     public void initDb() throws Exception {
         // using an in-memory database because the information stored here disappears when the
         // process is killed
-        mDatabase = Room.inMemoryDatabaseBuilder(InstrumentationRegistry.getContext(),
+        mDatabase = Room.inMemoryDatabaseBuilder(ApplicationTestCase.context(),
                 AppDatabase.class)
                 // allowing main thread queries, just for testing
                 .allowMainThreadQueries()

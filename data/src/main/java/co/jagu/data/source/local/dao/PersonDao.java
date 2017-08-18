@@ -12,7 +12,7 @@ import io.reactivex.Flowable;
 public interface PersonDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    long insert(PersonEntity person);
+    long insertOrUpdate(PersonEntity person);
 
     @Query("SELECT * FROM persons where id = :id")
     Flowable<PersonEntity> getPersonById(long id);
