@@ -27,8 +27,7 @@ public class LocalDataSourceTest extends BaseLocalDataSourceTest {
     @Mock
     private PersonDao mPersonDao;
 
-
-    /*--
+     /*--
      Fields
      --*/
     private PersonDataSource mDataSource;
