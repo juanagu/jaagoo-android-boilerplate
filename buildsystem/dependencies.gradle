@@ -17,6 +17,10 @@ ext {
     appCompatVersion = '25.3.1'
     constraintVersion = '1.0.2'
     designVersion = '25.3.1'
+    supportVersion = '25.3.1'
+    multidexVersion = '1.0.0'
+
+    androidArchVersion = '1.0.0-alpha5'
 
     daggerVersion = '2.8'
     butterKnifeVersion = '8.8.0'
@@ -29,6 +33,10 @@ ext {
     retrofitVersion = '2.3.0'
     androidAnnotationsVersion = '25.4.0'
     arrowVersion = '1.0.0'
+    fragmentargsVersion = '3.0.2'
+    autoValueVersion = '1.2'
+    autoValueParcelVersion = '0.2.5'
+    autoValueGsonVersion = '0.5.0'
 
     robolectricVersion = '3.1.1'
     jUnitVersion = '4.12'
@@ -37,32 +45,53 @@ ext {
     dexmakerVersion = '1.2'
     espressoVersion = '3.0.0'
     testingSupportLibVersion = '0.1'
+    testingSupportUnitTest = '1.0.0'
 
     //Development
     leakCanaryVersion = '1.5.1'
 
-    appDependencies = [
-            appCompat      : "com.android.support:appcompat-v7:${appCompatVersion}",
-            constraint     : "com.android.support.constraint:constraint-layout:${constraintVersion}",
-            design         : "com.android.support:design:${designVersion}",
-            daggerCompiler : "com.google.dagger:dagger-compiler:${daggerVersion}",
-            dagger         : "com.google.dagger:dagger:${daggerVersion}",
-            butterKnife    : "com.jakewharton:butterknife:${butterKnifeVersion}",
-            recyclerView   : "com.android.support:recyclerview-v7:${recyclerViewVersion}",
-            rxJava         : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
-            rxAndroid      : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
-            javaxAnnotation: "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+
+    presentationDependencies = [
+            multidex             : "com.android.support:multidex:${multidexVersion}",
+            appCompat            : "com.android.support:appcompat-v7:${appCompatVersion}",
+            constraint           : "com.android.support.constraint:constraint-layout:" +
+                    "${constraintVersion}",
+            support              : "com.android.support:support-v4:${supportVersion}",
+            design               : "com.android.support:design:${designVersion}",
+            daggerCompiler       : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            dagger               : "com.google.dagger:dagger:${daggerVersion}",
+            butterKnife          : "com.jakewharton:butterknife:${butterKnifeVersion}",
+            recyclerView         : "com.android.support:recyclerview-v7:${recyclerViewVersion}",
+            rxJava               : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxAndroid            : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            javaxAnnotation      : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            fragmentargs         : "com.hannesdorfmann.fragmentargs:annotation:" +
+                    "${fragmentargsVersion}",
+            fragmentargsProcessor: "com.hannesdorfmann.fragmentargs:processor:" +
+                    "${fragmentargsVersion}",
+            autoValue            : "com.google.auto.value:auto-value:${autoValueVersion}",
+            autoValueParcel      : "com.ryanharter.auto.value:auto-value-parcel:" +
+                    "${autoValueParcelVersion}",
+            autoValueGson        : "com.ryanharter.auto.value:auto-value-gson:" +
+                    "${autoValueGsonVersion}",
+            lifecycle            : "android.arch.lifecycle:runtime:${androidArchVersion}",
+            lifecycleExt         : "android.arch.lifecycle:extensions:${androidArchVersion}",
+            lifecycleCompiler    : "android.arch.lifecycle:compiler:${androidArchVersion}",
+
+
     ]
 
-    appTestDependencies = [
+    presentationTestDependencies = [
             mockito          : "org.mockito:mockito-core:${mockitoVersion}",
             dexmaker         : "com.google.dexmaker:dexmaker:${dexmakerVersion}",
             dexmakerMockito  : "com.google.dexmaker:dexmaker-mockito:${dexmakerVersion}",
             espresso         : "com.android.support.test.espresso:espresso-core:${espressoVersion}",
-            testingSupportLib: "com.android.support.test:testing-support-lib:${testingSupportLibVersion}",
+            testingSupportLib: "com.android.support.test:testing-support-lib:" +
+                    "${testingSupportLibVersion}",
     ]
 
     domainDependencies = [
+            autoValue      : "com.google.auto.value:auto-value:${autoValueVersion}",
             javaxAnnotation: "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
             javaxInject    : "javax.inject:javax.inject:${javaxInjectVersion}",
             rxJava         : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
@@ -84,14 +113,27 @@ ext {
             rxAndroid         : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
             javaxAnnotation   : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
             javaxInject       : "javax.inject:javax.inject:${javaxInjectVersion}",
-            androidAnnotations: "com.android.support:support-annotations:${androidAnnotationsVersion}"
+            androidAnnotations: "com.android" +
+                    ".support:support-annotations:${androidAnnotationsVersion}",
+            room              : "android.arch.persistence.room:runtime:${androidArchVersion}",
+            roomCompiler      : "android.arch.persistence.room:compiler:${androidArchVersion}",
+            roomRx            : "android.arch.persistence.room:rxjava2:${androidArchVersion}"
+
     ]
 
     dataTestDependencies = [
-            junit      : "junit:junit:${jUnitVersion}",
-            assertj    : "org.assertj:assertj-core:${assertJVersion}",
-            mockito    : "org.mockito:mockito-core:${mockitoVersion}",
-            robolectric: "org.robolectric:robolectric:${robolectricVersion}",
+            junit            : "junit:junit:${jUnitVersion}",
+            assertj          : "org.assertj:assertj-core:${assertJVersion}",
+            mockito          : "org.mockito:mockito-core:${mockitoVersion}",
+            robolectric      : "org.robolectric:robolectric:${robolectricVersion}",
+            room             : "android.arch.persistence.room:testing:${androidArchVersion}",
+            dexmaker         : "com.google.dexmaker:dexmaker:${dexmakerVersion}",
+            dexmakerMockito  : "com.google.dexmaker:dexmaker-mockito:${dexmakerVersion}",
+            testingSupportLib: "com.android.support.test:testing-support-lib:" +
+                    "${testingSupportLibVersion}",
+            testRunner       : "com.android.support.test:runner:${testingSupportUnitTest}",
+            testRules        : "com.android.support.test:rules:${testingSupportUnitTest}",
+            coreTesting      : "android.arch.core:core-testing:${androidArchVersion}"
     ]
 
     developmentDependencies = [
