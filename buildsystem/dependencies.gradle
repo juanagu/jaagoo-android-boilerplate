@@ -45,6 +45,7 @@ ext {
     dexmakerVersion = '1.2'
     espressoVersion = '3.0.0'
     testingSupportLibVersion = '0.1'
+    testingSupportUnitTest = '1.0.0'
 
     //Development
     leakCanaryVersion = '1.5.1'
@@ -90,7 +91,7 @@ ext {
     ]
 
     domainDependencies = [
-            autoValue            : "com.google.auto.value:auto-value:${autoValueVersion}",
+            autoValue      : "com.google.auto.value:auto-value:${autoValueVersion}",
             javaxAnnotation: "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
             javaxInject    : "javax.inject:javax.inject:${javaxInjectVersion}",
             rxJava         : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
@@ -117,14 +118,22 @@ ext {
             room              : "android.arch.persistence.room:runtime:${androidArchVersion}",
             roomCompiler      : "android.arch.persistence.room:compiler:${androidArchVersion}",
             roomRx            : "android.arch.persistence.room:rxjava2:${androidArchVersion}"
+
     ]
 
     dataTestDependencies = [
-            junit      : "junit:junit:${jUnitVersion}",
-            assertj    : "org.assertj:assertj-core:${assertJVersion}",
-            mockito    : "org.mockito:mockito-core:${mockitoVersion}",
-            robolectric: "org.robolectric:robolectric:${robolectricVersion}",
-            room       : "android.arch.persistence.room:testing:${androidArchVersion}"
+            junit            : "junit:junit:${jUnitVersion}",
+            assertj          : "org.assertj:assertj-core:${assertJVersion}",
+            mockito          : "org.mockito:mockito-core:${mockitoVersion}",
+            robolectric      : "org.robolectric:robolectric:${robolectricVersion}",
+            room             : "android.arch.persistence.room:testing:${androidArchVersion}",
+            dexmaker         : "com.google.dexmaker:dexmaker:${dexmakerVersion}",
+            dexmakerMockito  : "com.google.dexmaker:dexmaker-mockito:${dexmakerVersion}",
+            testingSupportLib: "com.android.support.test:testing-support-lib:" +
+                    "${testingSupportLibVersion}",
+            testRunner       : "com.android.support.test:runner:${testingSupportUnitTest}",
+            testRules        : "com.android.support.test:rules:${testingSupportUnitTest}",
+            coreTesting      : "android.arch.core:core-testing:${androidArchVersion}"
     ]
 
     developmentDependencies = [
