@@ -1,5 +1,6 @@
 package co.jagu.data.source.local;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,9 +28,9 @@ public class LocalDataSourceTest extends BaseLocalDataSourceTest {
     @Mock
     private PersonDao mPersonDao;
 
-     /*--
-     Fields
-     --*/
+    /*--
+    Fields
+    --*/
     private PersonDataSource mDataSource;
 
     /*--
@@ -48,15 +49,20 @@ public class LocalDataSourceTest extends BaseLocalDataSourceTest {
 
         PersonEntity person = PersonFakeFactory.createPerson();
 
-        //Mock
+        //Mock insert in dao
         Mockito.when(mPersonDao.insertOrUpdate(person)).then(invocationOnMock ->
                 FAKE_PERSON_ID);
-        Mockito.when(mPersonDao.getPersonById(FAKE_PERSON_ID)).then(invocationOnMock -> Flowable
-                .fromArray(person));
+
+        long personId = mDataSource.insertOrUpdate(person);
+        Assert.assertSame(personId, FAKE_PERSON_ID);
 
         //insertOrUpdate others
         mDataSource.insertOrUpdate(PersonFakeFactory.createPerson());
         mDataSource.insertOrUpdate(PersonFakeFactory.createPerson());
+
+        //Mock get in dao
+        Mockito.when(mPersonDao.getPersonById(FAKE_PERSON_ID)).then(invocationOnMock -> Flowable
+                .fromArray(person));
 
         mDataSource.getById(FAKE_PERSON_ID).test().assertValue(personEntity -> personEntity != null
                 && personEntity.getFirstName().equals(person.getFirstName())

@@ -2,12 +2,10 @@ package co.jagu.data.source.local.dao;
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule;
 import android.arch.persistence.room.Room;
-import android.support.test.InstrumentationRegistry;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
-import org.robolectric.RuntimeEnvironment;
 
 import co.jagu.data.ApplicationTestCase;
 
