@@ -11,7 +11,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import co.jagu.data.entity.PersonEntity;
 import co.jagu.data.source.PersonDataSource;
 import co.jagu.data.source.local.dao.PersonDao;
-import co.jagu.data.source.local.dao.factory.PersonFakeFactory;
+import co.jagu.data.source.local.dao.factory.LocalPersonFakeFactory;
 import io.reactivex.Flowable;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -47,7 +47,7 @@ public class LocalDataSourceTest extends BaseLocalDataSourceTest {
     @Test
     public void insertAndGetUser() {
 
-        PersonEntity person = PersonFakeFactory.createPerson();
+        PersonEntity person = LocalPersonFakeFactory.createPerson();
 
         //Mock insert in dao
         Mockito.when(mPersonDao.insertOrUpdate(person)).then(invocationOnMock ->
@@ -57,8 +57,8 @@ public class LocalDataSourceTest extends BaseLocalDataSourceTest {
         Assert.assertSame(personId, FAKE_PERSON_ID);
 
         //insertOrUpdate others
-        mDataSource.insertOrUpdate(PersonFakeFactory.createPerson());
-        mDataSource.insertOrUpdate(PersonFakeFactory.createPerson());
+        mDataSource.insertOrUpdate(LocalPersonFakeFactory.createPerson());
+        mDataSource.insertOrUpdate(LocalPersonFakeFactory.createPerson());
 
         //Mock get in dao
         Mockito.when(mPersonDao.getPersonById(FAKE_PERSON_ID)).then(invocationOnMock -> Flowable

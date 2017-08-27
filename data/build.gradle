@@ -79,5 +79,6 @@ dependencies {
     testCompile testDependencies.testRunner
     testCompile testDependencies.testRules
     testCompile testDependencies.coreTesting
+    testCompile testDependencies.mockwebserver
 
 }
