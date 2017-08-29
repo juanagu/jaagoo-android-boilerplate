@@ -39,8 +39,8 @@ public class PersonApiTest extends BaseApiTest {
         //call
         personApi.getPersonById(FAKE_PERSON_ID)
                 .test()
-                .assertValue(person1 -> person1 != null && person1.getId() == FAKE_PERSON_ID);
-
+                .assertValue(person1 -> person1 != null && person1.getId() == FAKE_PERSON_ID &&
+                        !person1.getFirstName().isEmpty() && !person1.getLastName().isEmpty());
     }
 
     @Test
@@ -61,6 +61,5 @@ public class PersonApiTest extends BaseApiTest {
         //call
         personApi.getPersonById(FAKE_PERSON_ID)
                 .test().assertNoValues();
-
     }
 }
