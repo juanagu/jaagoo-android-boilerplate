@@ -47,7 +47,7 @@ public class CommonPersonFakeFactoryTest {
     }
 
     /*--
-    Random first name
+    Random first name tests
     -- */
 
     @Test
@@ -63,7 +63,7 @@ public class CommonPersonFakeFactoryTest {
     }
 
     /*--
-    Random last name
+    Random last name tests
     -- */
 
     @Test
