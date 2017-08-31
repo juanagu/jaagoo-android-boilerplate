@@ -1,6 +1,6 @@
-package co.jagu.data.source.local;
+package co.jagu.data.source.remote;
 
-import org.junit.Assert;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,23 +10,23 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import co.jagu.data.entity.PersonEntity;
 import co.jagu.data.source.PersonDataSource;
-import co.jagu.data.source.local.dao.PersonDao;
 import co.jagu.data.source.local.dao.factory.LocalPersonFakeFactory;
+import co.jagu.data.source.remote.api.PersonApi;
 import io.reactivex.Flowable;
 
 @RunWith(MockitoJUnitRunner.class)
-public class LocalDataSourceTest extends BaseLocalDataSourceTest {
+public class PersonRemoteDataSourceTest extends BaseRemoteDataSourceTest {
 
     /*--
     Constants
     --*/
-    private static final long FAKE_PERSON_ID = 1;
-
+    private static final long FAKE_PERSON_ID = 1L;
     /*--
     Dependency
     --*/
+
     @Mock
-    private PersonDao mPersonDao;
+    private PersonApi mPersonApi;
 
     /*--
     Fields
@@ -34,34 +34,23 @@ public class LocalDataSourceTest extends BaseLocalDataSourceTest {
     private PersonDataSource mDataSource;
 
     /*--
-     Conf
-     --*/
+    Conf
+    --*/
     @Before
     public void init() {
-        mDataSource = new LocalPersonDataSource(mPersonDao);
+        mDataSource = new RemotePersonDataSource(mPersonApi);
     }
-
     /*--
-     Test
-     --*/
+    Test
+    --*/
+
     @Test
-    public void insertAndGetUser() {
+    public void getUserByIdTest() {
 
         PersonEntity person = LocalPersonFakeFactory.createPerson();
 
-        //Mock insert in dao
-        Mockito.when(mPersonDao.insertOrUpdate(person)).then(invocationOnMock ->
-                FAKE_PERSON_ID);
-
-        long personId = mDataSource.insertOrUpdate(person);
-        Assert.assertSame(personId, FAKE_PERSON_ID);
-
-        //insertOrUpdate others
-        mDataSource.insertOrUpdate(LocalPersonFakeFactory.createPerson());
-        mDataSource.insertOrUpdate(LocalPersonFakeFactory.createPerson());
-
-        //Mock get in dao
-        Mockito.when(mPersonDao.getPersonById(FAKE_PERSON_ID)).then(invocationOnMock -> Flowable
+        //Mock get in personApi
+        Mockito.when(mPersonApi.getPersonById(FAKE_PERSON_ID)).then(invocationOnMock -> Flowable
                 .fromArray(person));
 
         mDataSource.getById(FAKE_PERSON_ID).test().assertValue(personEntity -> personEntity != null
@@ -69,4 +58,5 @@ public class LocalDataSourceTest extends BaseLocalDataSourceTest {
                 && personEntity.getLastName().equals(person.getLastName()));
 
     }
+
 }
