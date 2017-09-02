@@ -13,6 +13,7 @@ import co.jagu.data.source.PersonDataSource;
 import co.jagu.data.source.local.dao.PersonDao;
 import co.jagu.data.source.local.dao.factory.LocalPersonFakeFactory;
 import io.reactivex.Flowable;
+import io.reactivex.subscribers.TestSubscriber;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LocalPersonDataSourceTest extends BaseLocalDataSourceTest {
@@ -53,7 +54,11 @@ public class LocalPersonDataSourceTest extends BaseLocalDataSourceTest {
         Mockito.when(mPersonDao.insertOrUpdate(person)).then(invocationOnMock ->
                 FAKE_PERSON_ID);
 
-        long personId = mDataSource.insertOrUpdate(person);
+        TestSubscriber<PersonEntity> insertOrUpdateTestSubscriber = mDataSource
+                .insertOrUpdate(person).test();
+        Assert.assertEquals(insertOrUpdateTestSubscriber.valueCount(), 1);
+        long personId = insertOrUpdateTestSubscriber.values().get(0).getId();
+
         Assert.assertSame(personId, FAKE_PERSON_ID);
 
         //insertOrUpdate others

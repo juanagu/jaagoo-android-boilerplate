@@ -7,10 +7,6 @@ import co.jagu.data.source.PersonDataSource;
 import co.jagu.data.source.remote.api.PersonApi;
 import io.reactivex.Flowable;
 
-/**
- * Created by juanagu on 30/8/17.
- */
-
 public class RemotePersonDataSource implements PersonDataSource {
 
     /*--
@@ -26,7 +22,7 @@ public class RemotePersonDataSource implements PersonDataSource {
         this.mPersonApi = personApi;
     }
     /*--
-    Implementation of PersonDatasource
+    Implementation of {@link PersonDataSource}
     --*/
 
     @Override
@@ -35,7 +31,13 @@ public class RemotePersonDataSource implements PersonDataSource {
     }
 
     @Override
-    public long insertOrUpdate(PersonEntity entity) {
-        return 0;
+    public Flowable<PersonEntity> insertOrUpdate(PersonEntity entity) {
+        long personId = entity.getId();
+        if (personId == 0) {
+            return mPersonApi.insert(entity);
+
+        } else {
+            return mPersonApi.update(personId, entity);
+        }
     }
 }
