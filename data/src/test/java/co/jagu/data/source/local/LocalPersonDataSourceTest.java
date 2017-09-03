@@ -54,11 +54,14 @@ public class LocalPersonDataSourceTest extends BaseLocalDataSourceTest {
         Mockito.when(mPersonDao.insertOrUpdate(person)).then(invocationOnMock ->
                 FAKE_PERSON_ID);
 
+        //insert person
         TestSubscriber<PersonEntity> insertOrUpdateTestSubscriber = mDataSource
                 .insertOrUpdate(person).test();
+        //check only return one result
         Assert.assertEquals(insertOrUpdateTestSubscriber.valueCount(), 1);
-        long personId = insertOrUpdateTestSubscriber.values().get(0).getId();
 
+        long personId = insertOrUpdateTestSubscriber.values().get(0).getId();
+        //check id is correct
         Assert.assertSame(personId, FAKE_PERSON_ID);
 
         //insertOrUpdate others

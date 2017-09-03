@@ -35,7 +35,6 @@ public class RemotePersonDataSource implements PersonDataSource {
         long personId = entity.getId();
         if (personId == 0) {
             return mPersonApi.insert(entity);
-
         } else {
             return mPersonApi.update(personId, entity);
         }
