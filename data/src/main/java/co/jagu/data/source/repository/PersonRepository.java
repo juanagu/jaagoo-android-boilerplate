@@ -36,7 +36,7 @@ public class PersonRepository implements PersonDataSource {
     }
 
     @Override
-    public long insertOrUpdate(PersonEntity entity) {
+    public Flowable<PersonEntity> insertOrUpdate(PersonEntity entity) {
         return mLocalDataSource.insertOrUpdate(entity);
     }
 }

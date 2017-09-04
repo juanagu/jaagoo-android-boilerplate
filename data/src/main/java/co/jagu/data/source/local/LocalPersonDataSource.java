@@ -1,5 +1,7 @@
 package co.jagu.data.source.local;
 
+import org.reactivestreams.Subscriber;
+
 import javax.inject.Inject;
 
 import co.jagu.data.entity.PersonEntity;
@@ -27,7 +29,23 @@ public class LocalPersonDataSource implements PersonDataSource {
     }
 
     @Override
-    public long insertOrUpdate(PersonEntity entity) {
-        return mPersonDao.insertOrUpdate(entity);
+    public Flowable<PersonEntity> insertOrUpdate(PersonEntity entity) {
+        return new Flowable<PersonEntity>() {
+            @Override
+            protected void subscribeActual(Subscriber<? super PersonEntity> s) {
+                try {
+                    //insert or replace person
+                    long personId = mPersonDao.insertOrUpdate(entity);
+                    //set id
+                    entity.setId(personId);
+
+                    s.onNext(entity);
+                    s.onComplete();
+                } catch (Exception e) {
+                    s.onError(e);
+                }
+
+            }
+        };
     }
 }

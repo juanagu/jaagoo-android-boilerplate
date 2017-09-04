@@ -11,11 +11,12 @@ import org.mockito.junit.MockitoJUnitRunner;
 import co.jagu.data.entity.PersonEntity;
 import co.jagu.data.source.PersonDataSource;
 import co.jagu.data.source.local.dao.PersonDao;
-import co.jagu.data.source.local.dao.factory.PersonFakeFactory;
+import co.jagu.data.source.local.dao.factory.LocalPersonFakeFactory;
 import io.reactivex.Flowable;
+import io.reactivex.subscribers.TestSubscriber;
 
 @RunWith(MockitoJUnitRunner.class)
-public class LocalDataSourceTest extends BaseLocalDataSourceTest {
+public class LocalPersonDataSourceTest extends BaseLocalDataSourceTest {
 
     /*--
     Constants
@@ -47,18 +48,25 @@ public class LocalDataSourceTest extends BaseLocalDataSourceTest {
     @Test
     public void insertAndGetUser() {
 
-        PersonEntity person = PersonFakeFactory.createPerson();
+        PersonEntity person = LocalPersonFakeFactory.createPerson();
 
         //Mock insert in dao
         Mockito.when(mPersonDao.insertOrUpdate(person)).then(invocationOnMock ->
                 FAKE_PERSON_ID);
 
-        long personId = mDataSource.insertOrUpdate(person);
+        //insert person
+        TestSubscriber<PersonEntity> insertOrUpdateTestSubscriber = mDataSource
+                .insertOrUpdate(person).test();
+        //check only return one result
+        Assert.assertEquals(insertOrUpdateTestSubscriber.valueCount(), 1);
+
+        long personId = insertOrUpdateTestSubscriber.values().get(0).getId();
+        //check id is correct
         Assert.assertSame(personId, FAKE_PERSON_ID);
 
         //insertOrUpdate others
-        mDataSource.insertOrUpdate(PersonFakeFactory.createPerson());
-        mDataSource.insertOrUpdate(PersonFakeFactory.createPerson());
+        mDataSource.insertOrUpdate(LocalPersonFakeFactory.createPerson());
+        mDataSource.insertOrUpdate(LocalPersonFakeFactory.createPerson());
 
         //Mock get in dao
         Mockito.when(mPersonDao.getPersonById(FAKE_PERSON_ID)).then(invocationOnMock -> Flowable

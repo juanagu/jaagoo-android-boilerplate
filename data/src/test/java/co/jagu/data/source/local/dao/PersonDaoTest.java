@@ -5,7 +5,7 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
 import co.jagu.data.entity.PersonEntity;
-import co.jagu.data.source.local.dao.factory.PersonFakeFactory;
+import co.jagu.data.source.local.dao.factory.LocalPersonFakeFactory;
 
 @RunWith(RobolectricTestRunner.class)
 public class PersonDaoTest extends BaseDaoTest {
@@ -15,8 +15,8 @@ public class PersonDaoTest extends BaseDaoTest {
     @Test
     public void insertAndGetPersonById() {
 
-        PersonEntity person = PersonFakeFactory.createPerson();
-        PersonEntity person1 = PersonFakeFactory.createPerson();
+        PersonEntity person = LocalPersonFakeFactory.createPerson();
+        PersonEntity person1 = LocalPersonFakeFactory.createPerson();
 
         mDatabase.personDao().insertOrUpdate(person1);
         final long PERSON_ID = mDatabase.personDao().insertOrUpdate(person);

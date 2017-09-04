@@ -61,7 +61,9 @@ dependencies {
     provided dataDependencies.javaxAnnotation
     compile dataDependencies.javaxInject
     compile dataDependencies.retrofit
+    compile dataDependencies.retrofitRx2Adapter
     compile dataDependencies.gson
+    compile dataDependencies.gsonConverter
     compile dataDependencies.rxJava
     compile dataDependencies.rxAndroid
     compile dataDependencies.androidAnnotations
@@ -79,5 +81,6 @@ dependencies {
     testCompile testDependencies.testRunner
     testCompile testDependencies.testRules
     testCompile testDependencies.coreTesting
+    testCompile testDependencies.mockwebserver
 
 }

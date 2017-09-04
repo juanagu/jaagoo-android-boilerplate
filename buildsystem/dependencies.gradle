@@ -30,13 +30,16 @@ ext {
     javaxAnnotationVersion = '1.0'
     javaxInjectVersion = '1'
     gsonVersion = '2.8.1'
+    gsonConverterVersion = '2.3.0'
     retrofitVersion = '2.3.0'
+    retrofitRx2AdapterVersion = '1.0.0'
     androidAnnotationsVersion = '25.4.0'
     arrowVersion = '1.0.0'
     fragmentargsVersion = '3.0.2'
     autoValueVersion = '1.2'
     autoValueParcelVersion = '0.2.5'
     autoValueGsonVersion = '0.5.0'
+    mockwebserverVersion = '3.8.1'
 
     robolectricVersion = '3.1.1'
     jUnitVersion = '4.12'
@@ -108,7 +111,10 @@ ext {
             daggerCompiler    : "com.google.dagger:dagger-compiler:${daggerVersion}",
             dagger            : "com.google.dagger:dagger:${daggerVersion}",
             retrofit          : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            retrofitRx2Adapter: "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:" +
+                    "${retrofitRx2AdapterVersion}",
             gson              : "com.google.code.gson:gson:${gsonVersion}",
+            gsonConverter     : "com.squareup.retrofit2:converter-gson:${gsonConverterVersion}",
             rxJava            : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
             rxAndroid         : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
             javaxAnnotation   : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
@@ -133,7 +139,10 @@ ext {
                     "${testingSupportLibVersion}",
             testRunner       : "com.android.support.test:runner:${testingSupportUnitTest}",
             testRules        : "com.android.support.test:rules:${testingSupportUnitTest}",
-            coreTesting      : "android.arch.core:core-testing:${androidArchVersion}"
+            coreTesting      : "android.arch.core:core-testing:${androidArchVersion}",
+            mockwebserver    : "com.squareup.okhttp3:mockwebserver:" +
+                    "${mockwebserverVersion}"
+
     ]
 
     developmentDependencies = [
