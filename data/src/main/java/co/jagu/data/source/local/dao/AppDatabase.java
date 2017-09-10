@@ -10,6 +10,10 @@ import co.jagu.data.entity.PersonEntity;
  */
 @Database(entities = {PersonEntity.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
+    /*--
+    Constant
+    --*/
+    public final static String DB_NAME = "app_db";
 
     /*--
     Dao

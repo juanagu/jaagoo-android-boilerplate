@@ -67,6 +67,9 @@ dependencies {
     compile dataDependencies.rxJava
     compile dataDependencies.rxAndroid
     compile dataDependencies.androidAnnotations
+    //dagger
+    apt dataDependencies.daggerCompiler
+    compile dataDependencies.dagger
     //android architecture components
     compile dataDependencies.room
     apt dataDependencies.roomCompiler

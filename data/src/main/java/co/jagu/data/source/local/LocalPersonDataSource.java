@@ -12,6 +12,10 @@ import io.reactivex.Flowable;
 
 public class LocalPersonDataSource implements PersonDataSource {
 
+    /*--
+    Dependency
+    --*/
+
     private final PersonDao mPersonDao;
 
     @Inject
