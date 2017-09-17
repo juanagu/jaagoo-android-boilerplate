@@ -69,6 +69,7 @@ dependencies {
     compile dataDependencies.androidAnnotations
     //dagger
     apt dataDependencies.daggerCompiler
+    testApt dataDependencies.daggerCompiler
     compile dataDependencies.dagger
     //android architecture components
     compile dataDependencies.room

@@ -5,10 +5,13 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
+import javax.inject.Singleton;
+
 import co.jagu.data.entity.PersonEntity;
 import io.reactivex.Flowable;
 
 @Dao
+@Singleton
 public interface PersonDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

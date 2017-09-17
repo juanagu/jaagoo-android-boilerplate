@@ -3,16 +3,14 @@ package co.jagu.data.injection.module;
 import android.arch.persistence.room.Room;
 import android.content.Context;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import co.jagu.data.injection.DatabaseInfo;
 import co.jagu.data.source.local.dao.AppDatabase;
 import co.jagu.data.source.local.dao.PersonDao;
 import dagger.Module;
 import dagger.Provides;
-
-/**
- * Created by juanagu on 10/9/17.
- */
 
 @Module
 public class DatabaseModule {
@@ -21,27 +19,29 @@ public class DatabaseModule {
     Dependency
     --*/
     protected Context context;
-    private String mDatabaseName;
+    protected String databaseName;
 
-    public DatabaseModule(Context context, String databaseName) {
+    @Inject
+    public DatabaseModule(Context context,
+                          @DatabaseInfo String databaseName) {
         this.context = context;
-        this.mDatabaseName = databaseName;
+        this.databaseName = databaseName;
     }
 
     /*--
     Provides
     --*/
-    @Singleton
     @Provides
+    @Singleton
     protected AppDatabase provideDatabase() {
         return Room.databaseBuilder(context,
                 AppDatabase.class,
-                mDatabaseName)
+                databaseName)
                 .build();
     }
 
-    @Singleton
     @Provides
+    @Singleton
     protected PersonDao providePersonDao(AppDatabase database) {
         return database.personDao();
     }

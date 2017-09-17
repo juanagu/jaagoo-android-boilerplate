@@ -1,38 +1,45 @@
 package co.jagu.data.injection.module;
 
+import com.google.gson.Gson;
+
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import co.jagu.data.injection.ServerInfo;
 import co.jagu.data.source.remote.api.PersonApi;
+import co.jagu.data.source.remote.factory.RemoteDataSourceBaseFactory;
 import dagger.Module;
 import dagger.Provides;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by juanagu on 10/9/17.
- */
 @Module
 public class NetworkModule {
 
     /*--
     Dependency
     --*/
-    private String mBaseUrl;
+    protected String baseUrl;
 
-    public NetworkModule(String baseUrl) {
-        this.mBaseUrl = baseUrl;
+    @Inject
+    public NetworkModule(@ServerInfo String baseUrl) {
+        this.baseUrl = baseUrl;
     }
+
 
     /*--
     Provides
     --*/
     @Provides
     @Singleton
-    Retrofit provideRetrofit() {
-        return new Retrofit.Builder()
-                .baseUrl(mBaseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+    Gson provideGson() {
+        return RemoteDataSourceBaseFactory.createGson();
+    }
+
+    @Provides
+    @Singleton
+    Retrofit provideRetrofit(Gson gson) {
+        return RemoteDataSourceBaseFactory.createRetrofit(baseUrl, gson);
+
     }
 
     @Provides

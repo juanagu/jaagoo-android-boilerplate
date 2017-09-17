@@ -1,29 +1,25 @@
 package co.jagu.data.injection.module;
 
-import android.arch.persistence.room.Room;
+
 import android.content.Context;
 
-import co.jagu.data.source.local.dao.AppDatabase;
-import dagger.Module;
+import javax.inject.Inject;
 
-@Module
+import co.jagu.data.injection.DatabaseInfo;
+import co.jagu.data.source.local.dao.AppDatabase;
+import co.jagu.data.source.local.factory.LocalDataSourceBaseFactory;
+
 public class TestDatabaseModule extends DatabaseModule {
 
-
-    public TestDatabaseModule(Context context) {
-        super(context);
+    @Inject
+    public TestDatabaseModule(Context context,
+                              @DatabaseInfo String databaseName) {
+        super(context, databaseName);
     }
 
-    /*--
-    Provides
-    --*/
 
     @Override
     protected AppDatabase provideDatabase() {
-        return Room.inMemoryDatabaseBuilder(context,
-                AppDatabase.class)
-                // allowing main thread queries, just for testing
-                .allowMainThreadQueries()
-                .build();
+        return LocalDataSourceBaseFactory.createAppDatabase(context, databaseName, true);
     }
 }
