@@ -58,8 +58,6 @@ dependencies {
 
     compile project(':domain')
 
-    provided dataDependencies.javaxAnnotation
-    compile dataDependencies.javaxInject
     compile dataDependencies.retrofit
     compile dataDependencies.retrofitRx2Adapter
     compile dataDependencies.gson
@@ -67,7 +65,9 @@ dependencies {
     compile dataDependencies.rxJava
     compile dataDependencies.rxAndroid
     compile dataDependencies.androidAnnotations
-    //dagger
+    //di
+    provided dataDependencies.javaxAnnotation
+    compile dataDependencies.javaxInject
     apt dataDependencies.daggerCompiler
     testApt dataDependencies.daggerCompiler
     compile dataDependencies.dagger

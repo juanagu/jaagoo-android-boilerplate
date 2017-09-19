@@ -6,12 +6,15 @@ import javax.inject.Singleton;
 import co.jagu.data.entity.PersonEntity;
 import co.jagu.data.injection.LocalDataSource;
 import co.jagu.data.injection.RemoteDataSource;
+import co.jagu.data.injection.Repository;
 import co.jagu.data.source.PersonDataSource;
 import io.reactivex.Flowable;
 
 /**
  * Repository for person entity
  */
+@Repository
+
 @Singleton
 public class PersonRepository implements PersonDataSource {
 
