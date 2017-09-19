@@ -11,8 +11,6 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import co.jagu.data.entity.PersonEntity;
-import co.jagu.data.injection.RemoteDataSource;
-import co.jagu.data.source.PersonDataSource;
 import co.jagu.data.source.local.dao.factory.LocalPersonFakeFactory;
 import co.jagu.data.source.remote.api.PersonApi;
 import io.reactivex.Flowable;

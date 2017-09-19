@@ -19,7 +19,7 @@ public class LocalPersonDataSource implements PersonDataSource {
     Dependency
     --*/
 
-    private final PersonDao mPersonDao;
+    private PersonDao mPersonDao;
 
     @Inject
     public LocalPersonDataSource(PersonDao personDao) {

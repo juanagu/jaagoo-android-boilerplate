@@ -11,6 +11,7 @@ import org.mockito.MockitoAnnotations;
 import co.jagu.data.entity.PersonEntity;
 import co.jagu.data.source.PersonDataSource;
 import co.jagu.data.source.local.dao.factory.LocalPersonFakeFactory;
+import io.reactivex.Flowable;
 
 /**
  * Unit test for {@link PersonRepository}
@@ -53,8 +54,11 @@ public class PersonRepositoryTest {
         PersonEntity person = LocalPersonFakeFactory.createPerson();
         person.setId(FAKE_PERSON_ID);
 
-        Mockito.when(mLocalPersonDataSource.getById(FAKE_PERSON_ID)).then(invocationOnMock ->
-                person);
+        //stubbed local data source
+        Mockito.when(mLocalPersonDataSource.getById(FAKE_PERSON_ID))
+                .then(invocationOnMock -> Flowable.just(person));
+
+        //get first result in repository
         PersonEntity personEntity = mPersonRepository.getById(FAKE_PERSON_ID)
                 .test().assertNoErrors()
                 .values().get(0);
