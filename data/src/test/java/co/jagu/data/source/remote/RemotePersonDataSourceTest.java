@@ -55,8 +55,8 @@ public class RemotePersonDataSourceTest extends BaseRemoteDataSourceTest {
         PersonEntity person = LocalPersonFakeFactory.createPerson();
 
         //Mock get in personApi
-        Mockito.when(mPersonApi.getPersonById(FAKE_PERSON_ID)).then(invocationOnMock -> Flowable
-                .fromArray(person));
+        Mockito.when(mPersonApi.getPersonById(FAKE_PERSON_ID))
+                .then(invocationOnMock -> Flowable.fromArray(person));
 
         mRemotePersonDataSource.getById(FAKE_PERSON_ID).test()
                 .assertValue(personEntity -> personEntity != null
