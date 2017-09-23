@@ -10,7 +10,7 @@ public interface GenericDataSource<T> {
 
     Flowable<T> getById(Long id);
 
-    long insertOrUpdate(T entity);
+    Flowable<T> insertOrUpdate(T entity);
 
    /* Flowable<List<T>> getAll();
 
