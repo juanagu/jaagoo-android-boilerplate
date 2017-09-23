@@ -15,6 +15,7 @@ import dagger.Provides;
 @Module(includes = {DatabaseModule.class, NetworkModule.class})
 public class PersonRepositoryModule {
 
+
     @Provides
     @LocalDataSource
     PersonDataSource provideLocalPersonDataSource(PersonDao personDao) {

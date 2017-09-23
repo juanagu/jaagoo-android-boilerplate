@@ -1,30 +1,23 @@
 package co.jagu.data.source.repository;
 
-import android.util.Log;
-
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
-
-import java.util.List;
 
 import co.jagu.data.entity.PersonEntity;
 import co.jagu.data.source.PersonDataSource;
 import co.jagu.data.source.local.dao.factory.LocalPersonFakeFactory;
 import io.reactivex.Flowable;
-import io.reactivex.subscribers.TestSubscriber;
 
 /**
  * Unit test for {@link PersonRepository}
  */
 @RunWith(MockitoJUnitRunner.class)
-public class PersonRepositoryTest {
+public class PersonRepositoryTest extends BaseRepositoryTest {
 
     /*--
     Constants
@@ -35,29 +28,29 @@ public class PersonRepositoryTest {
     Dependency
     --*/
     @Mock
-    PersonDataSource mLocalPersonDataSource;
+    private PersonDataSource mLocalPersonDataSource;
 
     @Mock
-    PersonDataSource mRemotePersonDataSource;
+    private PersonDataSource mRemotePersonDataSource;
     /*--
     Fields
     --*/
     @InjectMocks
-    private PersonRepository mPersonRepository;
+    PersonRepository mPersonRepository;
 
     /*--
     Conf
     --*/
     @Before
     public void setUp() throws Exception {
-        MockitoAnnotations.initMocks(this);
+        mPersonRepository = new PersonRepository(mLocalPersonDataSource, mRemotePersonDataSource);
     }
 
     /*--
     Test
     --*/
     @Test
-    public void getPersonById() {
+    public void getPersonById() throws Exception {
         //stubbed response
         PersonEntity person = LocalPersonFakeFactory.createPerson();
         person.setId(FAKE_PERSON_ID);
@@ -67,6 +60,9 @@ public class PersonRepositoryTest {
                 .thenReturn(Flowable.just(person));
 
         //get first result in repository
-        mPersonRepository.getById(FAKE_PERSON_ID).test();
+        mPersonRepository.getById(FAKE_PERSON_ID)
+                .test()
+                .assertNoErrors()
+                .assertValue(personEntity -> personEntity != null && personEntity.equals(person));
     }
 }
