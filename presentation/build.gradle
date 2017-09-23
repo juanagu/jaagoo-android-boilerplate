@@ -18,7 +18,7 @@ android {
         testInstrumentationRunner globalConfiguration.getAt("testInstrumentationRunner")
         testApplicationId globalConfiguration.getAt("testApplicationId")
 
-        // Enabling multidex support.
+        // Enabling multiDex support.
         multiDexEnabled true
 
     }

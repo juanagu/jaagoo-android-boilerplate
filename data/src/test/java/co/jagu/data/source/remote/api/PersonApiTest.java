@@ -4,10 +4,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import javax.inject.Inject;
+
 import co.jagu.data.source.remote.api.factory.RemotePersonFakeFactory;
 import co.jagu.data.source.remote.api.utils.WebServerMockUtils;
 import okhttp3.mockwebserver.MockResponse;
-import retrofit2.Retrofit;
 
 /**
  * Tests for {@link PersonApi}
@@ -16,12 +17,29 @@ import retrofit2.Retrofit;
 public class PersonApiTest extends BaseApiTest {
 
     /*--
+    Dependencies
+    --*/
+
+    @Inject
+    PersonApi personApi;
+
+    /*--
+    Config
+    --*/
+    @Override
+    public void setup() throws Exception {
+        super.setup();
+        testRemoteDataSourceComponent.inject(this);
+    }
+
+    /*--
     PersonById tests
     --*/
+
+
     @Test
     public void getPersonByIdTest() {
 
-        Retrofit retrofit = buildRetrofit();
 
         final long FAKE_PERSON_ID = 1L;
 
@@ -34,8 +52,6 @@ public class PersonApiTest extends BaseApiTest {
         WebServerMockUtils.setupSlowNetwork(mockResponse);
         //add response
         server.enqueue(mockResponse);
-        //create api
-        PersonApi personApi = retrofit.create(PersonApi.class);
         //call
         personApi.getPersonById(FAKE_PERSON_ID)
                 .test()
@@ -46,8 +62,6 @@ public class PersonApiTest extends BaseApiTest {
     @Test
     public void getPersonByIdNotFoundTest() {
 
-        Retrofit retrofit = buildRetrofit();
-
         final long FAKE_PERSON_ID = 1L;
 
         //create mock response with fake person
@@ -56,8 +70,6 @@ public class PersonApiTest extends BaseApiTest {
         WebServerMockUtils.setupNotFound(mockResponse);
         //add response
         server.enqueue(mockResponse);
-        //create api
-        PersonApi personApi = retrofit.create(PersonApi.class);
         //call
         personApi.getPersonById(FAKE_PERSON_ID)
                 .test().assertNoValues();

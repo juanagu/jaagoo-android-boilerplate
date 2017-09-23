@@ -3,16 +3,23 @@ package co.jagu.data.source.local;
 import org.reactivestreams.Subscriber;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import co.jagu.data.entity.PersonEntity;
+import co.jagu.data.injection.LocalDataSource;
 import co.jagu.data.source.PersonDataSource;
 import co.jagu.data.source.local.dao.PersonDao;
 import io.reactivex.Flowable;
 
-
+@Singleton
+@LocalDataSource
 public class LocalPersonDataSource implements PersonDataSource {
 
-    private final PersonDao mPersonDao;
+    /*--
+    Dependency
+    --*/
+
+    private PersonDao mPersonDao;
 
     @Inject
     public LocalPersonDataSource(PersonDao personDao) {

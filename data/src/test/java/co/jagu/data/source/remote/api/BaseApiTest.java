@@ -1,16 +1,15 @@
 package co.jagu.data.source.remote.api;
 
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-
 import org.junit.After;
 import org.junit.Before;
 
+import co.jagu.data.injection.component.DaggerTestBaseDataComponent;
+import co.jagu.data.injection.component.DaggerTestRemoteDataSourceComponent;
+import co.jagu.data.injection.component.TestRemoteDataSourceComponent;
+import co.jagu.data.injection.factory.ModuleFactory;
+import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockWebServer;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public abstract class BaseApiTest {
 
@@ -19,6 +18,7 @@ public abstract class BaseApiTest {
     --*/
     protected MockWebServer server;
 
+    protected TestRemoteDataSourceComponent testRemoteDataSourceComponent;
 
     /*--
     Config
@@ -28,6 +28,21 @@ public abstract class BaseApiTest {
         // Create a MockWebServer. These are lean enough that you can create a new
         // instance for every unit test.
         server = new MockWebServer();
+        HttpUrl url = server.url("");
+
+        ModuleFactory moduleFactory = DaggerTestBaseDataComponent
+                .builder()
+                .build()
+                .getModuleFactory();
+
+        //create dagger component
+        testRemoteDataSourceComponent = DaggerTestRemoteDataSourceComponent
+                .builder()
+                .networkModule(moduleFactory.createNetworkModule(url.toString()))
+                .build();
+
+        testRemoteDataSourceComponent.inject(this);
+
     }
 
     @After
@@ -35,24 +50,5 @@ public abstract class BaseApiTest {
         // Shut down the server. Instances cannot be reused.
         server.shutdown();
     }
-
-    /**
-     * Build retrofit with default configurations for test
-     *
-     * @return
-     */
-    protected Retrofit buildRetrofit() {
-        //Gson configurations
-        Gson gson = new GsonBuilder()
-                .create();
-
-        return new Retrofit.Builder()
-                .baseUrl(server.url("").toString())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                //TODO Add your Retrofit parameters here
-                .build();
-    }
-
 
 }

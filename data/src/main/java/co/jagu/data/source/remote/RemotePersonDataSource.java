@@ -1,12 +1,16 @@
 package co.jagu.data.source.remote;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import co.jagu.data.entity.PersonEntity;
+import co.jagu.data.injection.RemoteDataSource;
 import co.jagu.data.source.PersonDataSource;
 import co.jagu.data.source.remote.api.PersonApi;
 import io.reactivex.Flowable;
 
+@Singleton
+@RemoteDataSource
 public class RemotePersonDataSource implements PersonDataSource {
 
     /*--

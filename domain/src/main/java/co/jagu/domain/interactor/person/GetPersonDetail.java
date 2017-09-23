@@ -12,10 +12,6 @@ import co.jagu.domain.repository.PersonRepository;
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
 
-/**
- * Created by juanagu on 13/8/17.
- */
-
 public class GetPersonDetail extends UseCase<Person, GetPersonDetail.Params> {
 
 

@@ -1,14 +1,21 @@
 package co.jagu.data.source.repository;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import co.jagu.data.entity.PersonEntity;
+import co.jagu.data.injection.LocalDataSource;
+import co.jagu.data.injection.RemoteDataSource;
+import co.jagu.data.injection.Repository;
 import co.jagu.data.source.PersonDataSource;
 import io.reactivex.Flowable;
 
 /**
  * Repository for person entity
  */
+@Repository
+
+@Singleton
 public class PersonRepository implements PersonDataSource {
 
     /*--
@@ -21,8 +28,8 @@ public class PersonRepository implements PersonDataSource {
     Constructor
     --*/
     @Inject
-    public PersonRepository(PersonDataSource localDataSource,
-                            PersonDataSource remoteDataSource) {
+    public PersonRepository(@LocalDataSource PersonDataSource localDataSource,
+                            @RemoteDataSource PersonDataSource remoteDataSource) {
         this.mLocalDataSource = localDataSource;
         this.mRemoteDataSource = remoteDataSource;
     }
