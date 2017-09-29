@@ -2,8 +2,9 @@ package co.jagu.data.source.repository;
 
 import co.jagu.data.injection.Repository;
 import co.jagu.data.source.PersonDataSource;
+import co.jagu.domain.repository.PersonRepository;
 
-public abstract class RepositoryFactory {
+public interface RepositoryFactory {
 
     /**
      * create an instance for {@link Repository} {@link PersonDataSource} implementation
@@ -12,8 +13,6 @@ public abstract class RepositoryFactory {
      * @param remotePersonDataSource
      * @return
      */
-    public static PersonDataSource createPersonRepository(PersonDataSource localPersonDataSource,
-                                                          PersonDataSource remotePersonDataSource) {
-        return new PersonRepository(localPersonDataSource, remotePersonDataSource);
-    }
+    PersonRepository createPersonRepository(PersonDataSource localPersonDataSource,
+                                            PersonDataSource remotePersonDataSource);
 }

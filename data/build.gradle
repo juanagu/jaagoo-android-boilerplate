@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         mavenCentral()
+        maven { url "https://jitpack.io" }
     }
     dependencies {
         classpath 'me.tatarka:gradle-retrolambda:3.7.0'
@@ -55,6 +56,7 @@ android {
 dependencies {
     def dataDependencies = rootProject.ext.dataDependencies
     def testDependencies = rootProject.ext.dataTestDependencies
+    def commonDependencies = rootProject.ext.commonDependencies
 
     compile project(':domain')
 
@@ -75,6 +77,12 @@ dependencies {
     compile dataDependencies.room
     apt dataDependencies.roomCompiler
     compile dataDependencies.roomRx
+    //utils
+    compile commonDependencies.streamSupport
+    compile commonDependencies.streamSupportCfuture
+    compile commonDependencies.streamSupportAtomic
+    compile commonDependencies.streamSupportFlow
+    compile commonDependencies.streamSupportLiteral
 
 
     testCompile testDependencies.junit

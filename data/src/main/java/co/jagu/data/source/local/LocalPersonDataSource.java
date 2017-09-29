@@ -2,6 +2,8 @@ package co.jagu.data.source.local;
 
 import org.reactivestreams.Subscriber;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -54,5 +56,15 @@ public class LocalPersonDataSource implements PersonDataSource {
 
             }
         };
+    }
+
+    @Override
+    public Flowable<List<PersonEntity>> getAll() {
+        return null;
+    }
+
+    @Override
+    public void deleteById(long id) {
+
     }
 }

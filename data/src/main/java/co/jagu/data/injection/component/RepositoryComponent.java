@@ -5,6 +5,7 @@ import javax.inject.Singleton;
 import co.jagu.data.injection.Repository;
 import co.jagu.data.injection.module.PersonRepositoryModule;
 import co.jagu.data.source.PersonDataSource;
+import co.jagu.domain.repository.PersonRepository;
 import dagger.Component;
 
 
@@ -13,5 +14,5 @@ import dagger.Component;
 public interface RepositoryComponent {
 
     @Repository
-    PersonDataSource getPersonRepository();
+    PersonRepository getPersonRepository();
 }

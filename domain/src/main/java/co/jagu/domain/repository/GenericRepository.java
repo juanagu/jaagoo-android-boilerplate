@@ -2,6 +2,7 @@ package co.jagu.domain.repository;
 
 import java.util.List;
 
+import io.reactivex.Completable;
 import io.reactivex.Flowable;
 
 public interface GenericRepository<T> {
@@ -11,9 +12,7 @@ public interface GenericRepository<T> {
 
     Flowable<T> getById(Long id);
 
-    void insertOrUpdate(T entity);
+    Flowable<T> insertOrUpdate(T entity);
 
-    void deleteAll();
-
-    void deleteById(Long id);
+    Completable deleteById(Long id);
 }
