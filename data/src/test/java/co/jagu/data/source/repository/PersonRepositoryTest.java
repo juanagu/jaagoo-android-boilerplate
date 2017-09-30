@@ -1,6 +1,5 @@
 package co.jagu.data.source.repository;
 
-import org.apache.tools.ant.taskdefs.Length;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,12 +12,12 @@ import org.mockito.junit.MockitoJUnitRunner;
 import co.jagu.data.entity.PersonEntity;
 import co.jagu.data.entity.mapper.EntityDataMapper;
 import co.jagu.data.entity.mapper.PersonEntityDataMapper;
-import co.jagu.data.entity.mapper.PersonEntityDataMapperTest;
 import co.jagu.data.source.PersonDataSource;
 import co.jagu.data.source.local.dao.factory.LocalPersonFakeFactory;
 import co.jagu.domain.Person;
 import co.jagu.domain.repository.PersonRepository;
 import io.reactivex.Flowable;
+import io.reactivex.subscribers.TestSubscriber;
 
 /**
  * Unit test for {@link PersonRepository}
@@ -77,9 +76,12 @@ public class PersonRepositoryTest extends BaseRepositoryTest {
                 .thenReturn(Flowable.just(personEntity));
 
         //get first result in repository
-        mPersonRepository.getById(FAKE_PERSON_ID)
-                .test()
-                .assertNoErrors()
-                .assertValue(person1 -> person1 != null && person1.equals(personEntity));
+        TestSubscriber<Person> test = mPersonRepository.getById(FAKE_PERSON_ID)
+                .test();
+
+        Person person = mEntityDataMapper.transform(personEntity);
+        test.assertNoErrors();
+        test.assertValue(person1 -> person1 != null &&
+                person1.getId() == person.getId());
     }
 }

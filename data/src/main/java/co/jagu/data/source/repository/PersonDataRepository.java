@@ -53,7 +53,8 @@ public class PersonDataRepository extends BaseDataRepository<PersonEntity, Perso
         --*/
     @Override
     public Flowable<Person> getById(Long id) {
-        return mLocalDataSource.getById(id).map(entityDataMapper::transform);
+        Flowable<Person> map = mLocalDataSource.getById(id).map(entityDataMapper::transform);
+        return map;
     }
 
     @Override

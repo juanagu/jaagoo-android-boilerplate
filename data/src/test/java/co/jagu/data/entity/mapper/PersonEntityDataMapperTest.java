@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.jagu.data.entity.PersonEntity;
-import co.jagu.data.source.factory.CommonPersonFakeFactoryTest;
 import co.jagu.data.source.local.dao.factory.LocalPersonFakeFactory;
 import co.jagu.domain.Person;
 
