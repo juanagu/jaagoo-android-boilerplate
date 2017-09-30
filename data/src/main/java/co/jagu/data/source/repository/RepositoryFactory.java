@@ -7,12 +7,9 @@ import co.jagu.domain.repository.PersonRepository;
 public interface RepositoryFactory {
 
     /**
-     * create an instance for {@link Repository} {@link PersonDataSource} implementation
+     * create an instance for {@link Repository}
      *
-     * @param localPersonDataSource
-     * @param remotePersonDataSource
      * @return
      */
-    PersonRepository createPersonRepository(PersonDataSource localPersonDataSource,
-                                            PersonDataSource remotePersonDataSource);
+    PersonRepository createPersonRepository();
 }

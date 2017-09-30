@@ -31,13 +31,7 @@ public class PersonRepositoryModule {
 
     @Provides
     @Repository
-    PersonRepository providePersonRepository(RepositoryFactory repositoryFactory,
-                                             @LocalDataSource PersonDataSource
-                                                     localPersonDataSource,
-                                             @RemoteDataSource PersonDataSource
-                                                     remotePersonDataSource) {
-
-        return repositoryFactory.createPersonRepository(localPersonDataSource,
-                remotePersonDataSource);
+    PersonRepository providePersonRepository(RepositoryFactory repositoryFactory) {
+        return repositoryFactory.createPersonRepository();
     }
 }
