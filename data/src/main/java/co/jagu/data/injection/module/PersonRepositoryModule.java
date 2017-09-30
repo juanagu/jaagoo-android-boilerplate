@@ -9,10 +9,11 @@ import co.jagu.data.source.local.dao.PersonDao;
 import co.jagu.data.source.remote.RemoteDataSourceFactory;
 import co.jagu.data.source.remote.api.PersonApi;
 import co.jagu.data.source.repository.RepositoryFactory;
+import co.jagu.domain.repository.PersonRepository;
 import dagger.Module;
 import dagger.Provides;
 
-@Module(includes = {DatabaseModule.class, NetworkModule.class})
+@Module(includes = {RepositoryDataModule.class, DatabaseModule.class, NetworkModule.class})
 public class PersonRepositoryModule {
 
 
@@ -30,11 +31,13 @@ public class PersonRepositoryModule {
 
     @Provides
     @Repository
-    PersonDataSource providePersonRepository(@LocalDataSource PersonDataSource
+    PersonRepository providePersonRepository(RepositoryFactory repositoryFactory,
+                                             @LocalDataSource PersonDataSource
                                                      localPersonDataSource,
                                              @RemoteDataSource PersonDataSource
                                                      remotePersonDataSource) {
-        return RepositoryFactory
-                .createPersonRepository(localPersonDataSource, remotePersonDataSource);
+
+        return repositoryFactory.createPersonRepository(localPersonDataSource,
+                remotePersonDataSource);
     }
 }

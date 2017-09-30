@@ -50,6 +50,8 @@ ext {
     testingSupportLibVersion = '0.1'
     testingSupportUnitTest = '1.0.0'
 
+    //Common
+    streamSupportVersion = '1.5.6'
     //Development
     leakCanaryVersion = '1.5.1'
 
@@ -80,8 +82,6 @@ ext {
             lifecycle            : "android.arch.lifecycle:runtime:${androidArchVersion}",
             lifecycleExt         : "android.arch.lifecycle:extensions:${androidArchVersion}",
             lifecycleCompiler    : "android.arch.lifecycle:compiler:${androidArchVersion}",
-
-
     ]
 
     presentationTestDependencies = [
@@ -117,12 +117,8 @@ ext {
             gsonConverter     : "com.squareup.retrofit2:converter-gson:${gsonConverterVersion}",
             rxJava            : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
             rxAndroid         : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
-            javaxAnnotation   : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
-            javaxInject       : "javax.inject:javax.inject:${javaxInjectVersion}",
             androidAnnotations: "com.android" +
                     ".support:support-annotations:${androidAnnotationsVersion}",
-            daggerCompiler       : "com.google.dagger:dagger-compiler:${daggerVersion}",
-            dagger               : "com.google.dagger:dagger:${daggerVersion}",
             room              : "android.arch.persistence.room:runtime:${androidArchVersion}",
             roomCompiler      : "android.arch.persistence.room:compiler:${androidArchVersion}",
             roomRx            : "android.arch.persistence.room:rxjava2:${androidArchVersion}"
@@ -145,6 +141,23 @@ ext {
             mockwebserver    : "com.squareup.okhttp3:mockwebserver:" +
                     "${mockwebserverVersion}"
 
+    ]
+
+    commonDependencies = [
+            daggerCompiler    : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            dagger            : "com.google.dagger:dagger:${daggerVersion}",
+            javaxAnnotation   : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            javaxInject       : "javax.inject:javax.inject:${javaxInjectVersion}",
+            streamSupport       : "net.sourceforge.streamsupport:streamsupport:" +
+                    "${streamSupportVersion}",
+            streamSupportCfuture: "net.sourceforge.streamsupport:streamsupport-cfuture:" +
+                    "${streamSupportVersion}",
+            streamSupportAtomic : "net.sourceforge.streamsupport:streamsupport-atomic:" +
+                    "${streamSupportVersion}",
+            streamSupportFlow   : "net.sourceforge.streamsupport:streamsupport-flow:" +
+                    "${streamSupportVersion}",
+            streamSupportLiteral: "net.sourceforge.streamsupport:streamsupport-literal:" +
+                    "${streamSupportVersion}"
     ]
 
     developmentDependencies = [
