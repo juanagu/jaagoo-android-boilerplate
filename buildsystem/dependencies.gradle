@@ -117,12 +117,8 @@ ext {
             gsonConverter     : "com.squareup.retrofit2:converter-gson:${gsonConverterVersion}",
             rxJava            : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
             rxAndroid         : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
-            javaxAnnotation   : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
-            javaxInject       : "javax.inject:javax.inject:${javaxInjectVersion}",
             androidAnnotations: "com.android" +
                     ".support:support-annotations:${androidAnnotationsVersion}",
-            daggerCompiler    : "com.google.dagger:dagger-compiler:${daggerVersion}",
-            dagger            : "com.google.dagger:dagger:${daggerVersion}",
             room              : "android.arch.persistence.room:runtime:${androidArchVersion}",
             roomCompiler      : "android.arch.persistence.room:compiler:${androidArchVersion}",
             roomRx            : "android.arch.persistence.room:rxjava2:${androidArchVersion}"
@@ -148,6 +144,10 @@ ext {
     ]
 
     commonDependencies = [
+            daggerCompiler    : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            dagger            : "com.google.dagger:dagger:${daggerVersion}",
+            javaxAnnotation   : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            javaxInject       : "javax.inject:javax.inject:${javaxInjectVersion}",
             streamSupport       : "net.sourceforge.streamsupport:streamsupport:" +
                     "${streamSupportVersion}",
             streamSupportCfuture: "net.sourceforge.streamsupport:streamsupport-cfuture:" +

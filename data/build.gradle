@@ -68,11 +68,11 @@ dependencies {
     compile dataDependencies.rxAndroid
     compile dataDependencies.androidAnnotations
     //di
-    provided dataDependencies.javaxAnnotation
-    compile dataDependencies.javaxInject
-    apt dataDependencies.daggerCompiler
-    testApt dataDependencies.daggerCompiler
-    compile dataDependencies.dagger
+    provided commonDependencies.javaxAnnotation
+    compile commonDependencies.javaxInject
+    apt commonDependencies.daggerCompiler
+    testApt commonDependencies.daggerCompiler
+    compile commonDependencies.dagger
     //android architecture components
     compile dataDependencies.room
     apt dataDependencies.roomCompiler
