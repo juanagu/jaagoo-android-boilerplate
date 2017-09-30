@@ -1,5 +1,7 @@
 package co.jagu.data.source.remote;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -42,5 +44,15 @@ public class RemotePersonDataSource implements PersonDataSource {
         } else {
             return mPersonApi.update(personId, entity);
         }
+    }
+
+    @Override
+    public Flowable<List<PersonEntity>> getAll() {
+        return null;
+    }
+
+    @Override
+    public void deleteById(long id) {
+
     }
 }

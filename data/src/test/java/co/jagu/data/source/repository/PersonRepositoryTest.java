@@ -6,12 +6,18 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import co.jagu.data.entity.PersonEntity;
+import co.jagu.data.entity.mapper.EntityDataMapper;
+import co.jagu.data.entity.mapper.PersonEntityDataMapper;
 import co.jagu.data.source.PersonDataSource;
 import co.jagu.data.source.local.dao.factory.LocalPersonFakeFactory;
+import co.jagu.domain.Person;
+import co.jagu.domain.repository.PersonRepository;
 import io.reactivex.Flowable;
+import io.reactivex.subscribers.TestSubscriber;
 
 /**
  * Unit test for {@link PersonRepository}
@@ -32,18 +38,27 @@ public class PersonRepositoryTest extends BaseRepositoryTest {
 
     @Mock
     private PersonDataSource mRemotePersonDataSource;
+
+    private EntityDataMapper<PersonEntity, Person> mEntityDataMapper;
     /*--
     Fields
     --*/
     @InjectMocks
-    PersonRepository mPersonRepository;
+    PersonDataRepository mPersonRepository;
 
     /*--
     Conf
     --*/
     @Before
     public void setUp() throws Exception {
-        mPersonRepository = new PersonRepository(mLocalPersonDataSource, mRemotePersonDataSource);
+        MockitoAnnotations.initMocks(this);
+        //inject
+        mEntityDataMapper = new PersonEntityDataMapper();
+        //repository test
+        mPersonRepository = new PersonDataRepository(mLocalPersonDataSource,
+                mRemotePersonDataSource,
+                mEntityDataMapper
+        );
     }
 
     /*--
@@ -52,17 +67,21 @@ public class PersonRepositoryTest extends BaseRepositoryTest {
     @Test
     public void getPersonById() throws Exception {
         //stubbed response
-        PersonEntity person = LocalPersonFakeFactory.createPerson();
-        person.setId(FAKE_PERSON_ID);
+        PersonEntity personEntity = LocalPersonFakeFactory.createPerson();
+
+        personEntity.setId(FAKE_PERSON_ID);
 
         //stubbed local data source
         Mockito.when(mLocalPersonDataSource.getById(FAKE_PERSON_ID))
-                .thenReturn(Flowable.just(person));
+                .thenReturn(Flowable.just(personEntity));
 
         //get first result in repository
-        mPersonRepository.getById(FAKE_PERSON_ID)
-                .test()
-                .assertNoErrors()
-                .assertValue(personEntity -> personEntity != null && personEntity.equals(person));
+        TestSubscriber<Person> test = mPersonRepository.getById(FAKE_PERSON_ID)
+                .test();
+
+        Person person = mEntityDataMapper.transform(personEntity);
+        test.assertNoErrors();
+        test.assertValue(person1 -> person1 != null &&
+                person1.getId() == person.getId());
     }
 }

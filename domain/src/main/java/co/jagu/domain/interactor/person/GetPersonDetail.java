@@ -3,6 +3,7 @@ package co.jagu.domain.interactor.person;
 import com.fernandocejas.arrow.checks.Preconditions;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import co.jagu.domain.Person;
 import co.jagu.domain.executor.PostExecutionThread;
@@ -12,14 +13,16 @@ import co.jagu.domain.repository.PersonRepository;
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
 
+@Singleton
 public class GetPersonDetail extends UseCase<Person, GetPersonDetail.Params> {
 
 
     private final PersonRepository personRepository;
 
     @Inject
-    GetPersonDetail(PersonRepository personRepository, ThreadExecutor threadExecutor,
-                    PostExecutionThread postExecutionThread) {
+    public GetPersonDetail(PersonRepository personRepository,
+                           ThreadExecutor threadExecutor,
+                           PostExecutionThread postExecutionThread) {
         super(threadExecutor, postExecutionThread);
         this.personRepository = personRepository;
     }

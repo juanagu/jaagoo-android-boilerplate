@@ -1,5 +1,7 @@
 package co.jagu.data.source;
 
+import java.util.List;
+
 import io.reactivex.Flowable;
 
 /**
@@ -12,9 +14,7 @@ public interface GenericDataSource<T> {
 
     Flowable<T> insertOrUpdate(T entity);
 
-   /* Flowable<List<T>> getAll();
+    Flowable<List<T>> getAll();
 
-    void deleteAll();
-
-    void deleteById(Long id);*/
+    void deleteById(long id);
 }
