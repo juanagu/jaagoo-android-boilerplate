@@ -23,7 +23,7 @@ import co.jagu.presentation.ui.base.BaseFragment;
  * create an instance of this fragment.
  */
 @FragmentWithArgs
-public class PersonDetailFragment extends BaseFragment implements PersonDetailView {
+public class PersonDetailFragment extends BaseFragment{
 
     /*--
     Fields
@@ -53,7 +53,6 @@ public class PersonDetailFragment extends BaseFragment implements PersonDetailVi
 
         super.onCreate(savedInstanceState);
 
-        mPersonDetailViewModel.attachView(this);
         mPersonDetailViewModel.setPersonId(mPersonId);
     }
 
@@ -70,20 +69,5 @@ public class PersonDetailFragment extends BaseFragment implements PersonDetailVi
         //inject view components
         ButterKnife.bind(view);
         return view;
-    }
-
-
-    /*--
-    Implementation of {@link PersonDetailView}
-    --*/
-
-    /**
-     * Render a person in the UI
-     *
-     * @param personModel
-     */
-    @Override
-    public void renderPerson(PersonModel personModel) {
-
     }
 }

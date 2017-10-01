@@ -3,12 +3,13 @@ package co.jagu.presentation.injection.module;
 import android.app.Application;
 import android.content.Context;
 
+import co.jagu.data.injection.module.PersonRepositoryModule;
 import co.jagu.presentation.AndroidApplication;
 import co.jagu.presentation.injection.ApplicationContext;
 import dagger.Module;
 import dagger.Provides;
 
-@Module
+@Module(includes = {ViewModelModule.class})
 public class ApplicationModule {
 
     /*--

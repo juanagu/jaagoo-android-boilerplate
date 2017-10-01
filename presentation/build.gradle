@@ -2,6 +2,13 @@ apply plugin: 'com.android.application'
 apply from: '../config/quality/quality.gradle'
 apply plugin: 'com.neenbedankt.android-apt'
 
+apt {
+    arguments {
+        fragmentArgsLib false
+        fragmentArgsSupportAnnotations true
+    }
+}
+
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
 
@@ -22,7 +29,9 @@ android {
         multiDexEnabled true
 
     }
-
+    dataBinding {
+        enabled = true
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
@@ -66,7 +75,7 @@ android {
             java.srcDir commonTestDir
         }
     }
-    buildToolsVersion '26.0.0'
+    buildToolsVersion '26.0.1'
 }
 
 dependencies {
@@ -101,7 +110,7 @@ dependencies {
 
     //fragment args
     compile presentationDependencies.fragmentargs
-    annotationProcessor presentationDependencies.fragmentargsProcessor
+    apt presentationDependencies.fragmentargsProcessor
 
     //auto value
     provided presentationDependencies.autoValue
@@ -118,7 +127,10 @@ dependencies {
     androidTestCompile presentationTestDependencies.mockito
     androidTestCompile presentationTestDependencies.dexmaker
     androidTestCompile presentationTestDependencies.dexmakerMockito
-    androidTestCompile presentationTestDependencies.espresso
+    androidTestCompile presentationTestDependencies.espresso, {
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.google.code.findbugs', module: 'jsr305'
+    }
     androidTestCompile presentationTestDependencies.testingSupportLib
 
     //Development

@@ -11,7 +11,7 @@ import co.jagu.domain.Person;
 import dagger.Module;
 import dagger.Provides;
 
-@Module
+@Module(includes = {DatabaseModule.class, NetworkModule.class})
 public class RepositoryDataModule {
 
     /**

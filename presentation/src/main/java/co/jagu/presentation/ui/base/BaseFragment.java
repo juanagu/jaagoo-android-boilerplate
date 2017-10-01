@@ -41,4 +41,5 @@ public abstract class BaseFragment extends LifecycleFragment {
         // clear all the subscriptions
         mDisposable.clear();
     }
+
 }

@@ -9,36 +9,38 @@ allprojects {
 
 ext {
     //Android
-    androidBuildToolsVersion = "26.0.0"
+    androidBuildToolsVersion = "26.0.1"
     androidMinSdkVersion = 21
-    androidTargetSdkVersion = 25
-    androidCompileSdkVersion = 25
+    androidTargetSdkVersion = 26
+    androidCompileSdkVersion = 26
 
-    appCompatVersion = '25.3.1'
     constraintVersion = '1.0.2'
-    designVersion = '25.3.1'
-    supportVersion = '25.3.1'
+    supportVersion = '26.0.2'
     multidexVersion = '1.0.0'
 
-    androidArchVersion = '1.0.0-alpha5'
+    androidArchVersion = '1.0.0-alpha9'
 
     daggerVersion = '2.8'
     butterKnifeVersion = '8.8.0'
-    recyclerViewVersion = '25.3.1'
     rxJavaVersion = '2.1.2'
     rxAndroidVersion = '2.0.1'
     javaxAnnotationVersion = '1.0'
     javaxInjectVersion = '1'
+
     gsonVersion = '2.8.1'
     gsonConverterVersion = '2.3.0'
     retrofitVersion = '2.3.0'
     retrofitRx2AdapterVersion = '1.0.0'
-    androidAnnotationsVersion = '25.4.0'
+
     arrowVersion = '1.0.0'
-    fragmentargsVersion = '3.0.2'
+    fragmentargsVersion = '4.0.0-SNAPSHOT'
+    glideVersion = '4.1.1'
+
+
     autoValueVersion = '1.2'
     autoValueParcelVersion = '0.2.5'
     autoValueGsonVersion = '0.5.0'
+
     mockwebserverVersion = '3.8.1'
 
     robolectricVersion = '3.1.1'
@@ -58,15 +60,15 @@ ext {
 
     presentationDependencies = [
             multidex             : "com.android.support:multidex:${multidexVersion}",
-            appCompat            : "com.android.support:appcompat-v7:${appCompatVersion}",
+            appCompat            : "com.android.support:appcompat-v7:${supportVersion}",
             constraint           : "com.android.support.constraint:constraint-layout:" +
                     "${constraintVersion}",
             support              : "com.android.support:support-v4:${supportVersion}",
-            design               : "com.android.support:design:${designVersion}",
+            design               : "com.android.support:design:${supportVersion}",
             daggerCompiler       : "com.google.dagger:dagger-compiler:${daggerVersion}",
             dagger               : "com.google.dagger:dagger:${daggerVersion}",
             butterKnife          : "com.jakewharton:butterknife:${butterKnifeVersion}",
-            recyclerView         : "com.android.support:recyclerview-v7:${recyclerViewVersion}",
+            recyclerView         : "com.android.support:recyclerview-v7:${supportVersion}",
             rxJava               : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
             rxAndroid            : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
             javaxAnnotation      : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
@@ -82,6 +84,8 @@ ext {
             lifecycle            : "android.arch.lifecycle:runtime:${androidArchVersion}",
             lifecycleExt         : "android.arch.lifecycle:extensions:${androidArchVersion}",
             lifecycleCompiler    : "android.arch.lifecycle:compiler:${androidArchVersion}",
+            glide                : "com.github.bumptech.glide:glide:${glideVersion}",
+            glideCompiler        : "com.github.bumptech.glide:compiler:${glideVersion}"
     ]
 
     presentationTestDependencies = [
@@ -118,7 +122,7 @@ ext {
             rxJava            : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
             rxAndroid         : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
             androidAnnotations: "com.android" +
-                    ".support:support-annotations:${androidAnnotationsVersion}",
+                    ".support:support-annotations:${supportVersion}",
             room              : "android.arch.persistence.room:runtime:${androidArchVersion}",
             roomCompiler      : "android.arch.persistence.room:compiler:${androidArchVersion}",
             roomRx            : "android.arch.persistence.room:rxjava2:${androidArchVersion}"
@@ -144,10 +148,10 @@ ext {
     ]
 
     commonDependencies = [
-            daggerCompiler    : "com.google.dagger:dagger-compiler:${daggerVersion}",
-            dagger            : "com.google.dagger:dagger:${daggerVersion}",
-            javaxAnnotation   : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
-            javaxInject       : "javax.inject:javax.inject:${javaxInjectVersion}",
+            daggerCompiler      : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            dagger              : "com.google.dagger:dagger:${daggerVersion}",
+            javaxAnnotation     : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            javaxInject         : "javax.inject:javax.inject:${javaxInjectVersion}",
             streamSupport       : "net.sourceforge.streamsupport:streamsupport:" +
                     "${streamSupportVersion}",
             streamSupportCfuture: "net.sourceforge.streamsupport:streamsupport-cfuture:" +

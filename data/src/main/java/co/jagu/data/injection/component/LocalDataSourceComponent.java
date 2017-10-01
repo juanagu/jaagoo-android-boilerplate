@@ -8,8 +8,7 @@ import co.jagu.data.source.local.dao.PersonDao;
 import dagger.Component;
 
 @Singleton
-@Component(modules = {
-        DatabaseModule.class})
+@Component(modules = {DatabaseModule.class})
 public interface LocalDataSourceComponent {
 
     /*--
