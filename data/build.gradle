@@ -50,7 +50,7 @@ android {
         // Due to Robolectric that modifies the manifest when running tests
     }
 
-    buildToolsVersion '26.0.0'
+    buildToolsVersion '26.0.1'
 }
 
 dependencies {

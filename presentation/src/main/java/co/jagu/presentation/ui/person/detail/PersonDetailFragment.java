@@ -1,6 +1,11 @@
 package co.jagu.presentation.ui.person.detail;
 
 
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
+import android.databinding.DataBindingComponent;
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,24 +20,31 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import co.jagu.presentation.R;
+import co.jagu.presentation.binding.FragmentDataBindingComponent;
 import co.jagu.presentation.model.PersonModel;
 import co.jagu.presentation.ui.base.BaseFragment;
+import co.jagu.presentation.util.AutoClearedValue;
 
 /**
  * A simple {@link Fragment} subclass.
  * create an instance of this fragment.
  */
 @FragmentWithArgs
-public class PersonDetailFragment extends BaseFragment{
+public class PersonDetailFragment extends BaseFragment {
 
+    /*--
+    Dependency
+    -- */
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
     /*--
     Fields
     --*/
     @Arg
     long mPersonId;
 
-    @Inject
-    PersonDetailViewModel mPersonDetailViewModel;
+    DataBindingComponent dataBindingComponent = new FragmentDataBindingComponent(this);
+    private AutoClearedValue<ViewDataBinding> binding;
     /*--
     Constructor
     --*/
@@ -53,8 +65,8 @@ public class PersonDetailFragment extends BaseFragment{
 
         super.onCreate(savedInstanceState);
 
-        mPersonDetailViewModel.setPersonId(mPersonId);
     }
+
 
     /**
      * @param inflater
@@ -64,10 +76,26 @@ public class PersonDetailFragment extends BaseFragment{
      */
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_person_detail, container, false);
+
+        ViewDataBinding dataBinding = DataBindingUtil.inflate(inflater,
+                R.layout.fragment_person_detail,
+                container, false, dataBindingComponent);
+        binding = new AutoClearedValue<>(this, dataBinding);
+        View view = dataBinding.getRoot();
         //inject view components
         ButterKnife.bind(view);
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        PersonDetailViewModel personDetailViewModel = ViewModelProviders
+                .of(this, viewModelFactory).get(PersonDetailViewModel.class);
+
+        personDetailViewModel.setPersonId(mPersonId);
+
+        //personDetailViewModel.getPerson().subscribe(p -> binding.get().setVariable()});
     }
 }

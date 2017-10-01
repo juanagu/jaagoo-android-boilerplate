@@ -1,9 +1,17 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="co.jagu.presentation.co.jagu.presentation.ui.person.detail.PersonDetailFragment">
+             tools:context="co.jagu.presentation.ui.person.detail.PersonDetailFragment">
 
+    <data>
+
+        <variable
+            name="person"
+            type="co.jagu.domain.Person"/>
+
+    </data>
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
