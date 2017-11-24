@@ -1,23 +1,28 @@
 package co.jagu.presentation;
 
+import android.app.Activity;
 import android.app.Application;
 
 import com.squareup.leakcanary.LeakCanary;
 
-import co.jagu.presentation.injection.component.ApplicationComponent;
-import co.jagu.presentation.injection.component.DaggerApplicationComponent;
-import co.jagu.presentation.injection.module.ApplicationModule;
+import javax.inject.Inject;
+
+import co.jagu.presentation.injection.AppInjector;
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasActivityInjector;
 
 /**
  * Android main application
  */
 
-public class AndroidApplication extends Application {
+public class AndroidApplication extends Application implements HasActivityInjector {
 
     /*--
     Fields
     -- */
-    private ApplicationComponent mApplicationComponent;
+    @Inject
+    DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
 
     /*--
     Lifecycle
@@ -25,18 +30,10 @@ public class AndroidApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        this.initializeInjector();
+        AppInjector.init(this);
         this.initializeLeakDetection();
     }
 
-    /*--
-    private methods
-    -- */
-    private void initializeInjector() {
-        this.mApplicationComponent = DaggerApplicationComponent.builder()
-                .applicationModule(new ApplicationModule(this))
-                .build();
-    }
 
     /**
      * Initialize leak canary only for debug
@@ -47,12 +44,9 @@ public class AndroidApplication extends Application {
         }
     }
 
-    /*--
-    public methods
-    -- */
-    public ApplicationComponent getApplicationComponent() {
-        return this.mApplicationComponent;
+
+    @Override
+    public AndroidInjector<Activity> activityInjector() {
+        return dispatchingAndroidInjector;
     }
-
-
 }

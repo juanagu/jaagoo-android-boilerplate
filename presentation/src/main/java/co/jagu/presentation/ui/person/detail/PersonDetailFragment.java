@@ -21,7 +21,6 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 import co.jagu.presentation.R;
 import co.jagu.presentation.binding.FragmentDataBindingComponent;
-import co.jagu.presentation.model.PersonModel;
 import co.jagu.presentation.ui.base.BaseFragment;
 import co.jagu.presentation.util.AutoClearedValue;
 
@@ -77,8 +76,8 @@ public class PersonDetailFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        ViewDataBinding dataBinding = DataBindingUtil.inflate(inflater,
-                R.layout.fragment_person_detail,
+        ViewDataBinding dataBinding = DataBindingUtil.inflate(inflater, R.layout
+                        .fragment_person_detail,
                 container, false, dataBindingComponent);
         binding = new AutoClearedValue<>(this, dataBinding);
         View view = dataBinding.getRoot();

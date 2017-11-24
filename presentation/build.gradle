@@ -2,6 +2,7 @@ buildscript {
     repositories {
         mavenCentral()
         maven { url "https://jitpack.io" }
+        maven { url 'https://maven.google.com' }
     }
     dependencies {
         classpath 'me.tatarka:gradle-retrolambda:3.7.0'
@@ -112,6 +113,9 @@ dependencies {
     //dagger
     apt presentationDependencies.daggerCompiler
     compile presentationDependencies.dagger
+    compile presentationDependencies.daggerAndroid
+    compile presentationDependencies.daggerAndroidSupport
+    provided presentationDependencies.daggerAndroidProcessor
     //butter knife
     compile presentationDependencies.butterKnife
     //fx
